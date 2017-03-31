@@ -15,28 +15,28 @@
 <h2>UUID: {{ original_file['uuid'] }}</h2>
 
 <h3>General details</h3>
-<p>Filepath: {{ original_file['filepath'] }}</p>
-<p>Size (human-readable): {{ original_file['size'] }}</p>
-<p>Size (bytes): {{ original_file['bytes'] }}</p>
-<p>File format: {{ original_file['format'] }}</p>
-<p>Version: {{ original_file['version'] }}</p>
-<p>PRONOM ID (PUID): {{ original_file['puid'] }}</p>
-<p>amdSec ID: {{ original_file['amdsec_id'] }}</p>
+<p><strong>Filepath:</strong> {{ original_file['filepath'] }}</p>
+<p><strong>Size (human-readable):</strong> {{ original_file['size'] }}</p>
+<p><strong>Size (bytes):</strong> {{ original_file['bytes'] }}</p>
+<p><strong>File format:</strong> {{ original_file['format'] }}</p>
+<p><strong>Version:</strong> {{ original_file['version'] }}</p>
+<p><strong>PRONOM ID (PUID):</strong> {{ original_file['puid']|safe }}</p>
+<p><strong>amdSec ID:</strong> {{ original_file['amdsec_id'] }}</p>
 
 <h3>Exiftool</h3>
-<p>Date modified: {{ original_file['fits_modified'] }}</p>
-<p>Date created: {{ original_file['fits_created'] }}</p>
-<p>Format: {{ original_file['exiftool_format'] }}</p>
-<p>MIME Type: {{ original_file['exiftool_mimetype'] }}</p>
+<p><strong>Date modified:</strong> {{ original_file['fits_modified'] }}</p>
+<p><strong>Date created:</strong> {{ original_file['fits_created'] }}</p>
+<p><strong>Format:</strong> {{ original_file['exiftool_format'] }}</p>
+<p><strong>MIME Type:</strong> {{ original_file['exiftool_mimetype'] }}</p>
 
 <h3>MediaInfo</h3>
-<p>Date modified: {{ original_file['mediainfo_modified'] }}</p>
-<p>Format: {{ original_file['mediainfo_format'] }}</p>
-<p>MIME Type: {{ original_file['mediainfo_mimetype'] }}</p>
+<p><strong>Date modified:</strong> {{ original_file['mediainfo_modified'] }}</p>
+<p><strong>Format:</strong> {{ original_file['mediainfo_format'] }}</p>
+<p><strong>MIME Type:</strong> {{ original_file['mediainfo_mimetype'] }}</p>
 
 <h3>File Utility</h3>
-<p>Format: {{ original_file['fileutil_format'] }}</p>
-<p>MIME Type: {{ original_file['fileutil_mimetype'] }}</p>
+<p><strong>Format:</strong> {{ original_file['fileutil_format'] }}</p>
+<p><strong>MIME Type:</strong> {{ original_file['fileutil_mimetype'] }}</p>
 
 </body>
 </html>

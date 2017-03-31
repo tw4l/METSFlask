@@ -105,3 +105,11 @@ original_files = mets_to_list_of_dicts(mets_path)
 def index():
     return render_template('mets-view.html', original_files = original_files)
 
+@app.route('/file/<UUID>')
+def show_file(UUID):
+    for original_file in original_files:
+        if original_file["uuid"] == UUID:
+            target_original_file = original_file
+            break
+    return render_template('detail.html', original_file=target_original_file)
+
