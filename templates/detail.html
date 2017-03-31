@@ -10,9 +10,14 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">METSFlask</a>
+    </div>
+  </div>
+</nav>
 <div class="container">
-<h1>METSFlask</h1>
-
 <h3>File UUID: {{ original_file['uuid'] }}</h3>
 <p><strong>METS File:</strong> {{ aip_name }}</p>
 
