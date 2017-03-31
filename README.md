@@ -8,8 +8,9 @@ Flask application for viewing detailed information on "original" files in an Arc
 * Clone repo
 * Create py3 venv and activate
 * pip install Flask   
-* pip install lxml  
-* `flask run`  
+* pip install lxml 
+* `export FLASK_APP=metsflask.py`   
+* `flask run`  
 
 ## To Do  
 * Add file upload  
