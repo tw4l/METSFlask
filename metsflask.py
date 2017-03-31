@@ -157,10 +157,12 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             mets_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            global aip_name
+            aip_name = os.path.basename(filename)
             global original_files
             original_files = mets_to_list_of_dicts(mets_path) # write details to global original_files list of dicts
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # delte file from uploads folder
-            return render_template('originalfiles.html', original_files = original_files)
+            return render_template('originalfiles.html', original_files = original_files, aip_name = aip_name)
 
 
 @app.route('/file/<UUID>')
@@ -169,5 +171,5 @@ def show_file(UUID):
         if original_file["uuid"] == UUID:
             target_original_file = original_file
             break
-    return render_template('detail.html', original_file=target_original_file)
+    return render_template('detail.html', original_file=target_original_file, aip_name = aip_name)
 
