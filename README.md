@@ -15,6 +15,7 @@ Flask application for viewing detailed information on "original" files in an Arc
 
 ## To Do    
 * Add info about preservation derivative to detail page?  
+* Add more tool-specific extracted metadata to detail page  
 * Style  
 * Test  
 * Deploy  
