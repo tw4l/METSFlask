@@ -13,6 +13,6 @@ Flask application for viewing detailed information on "original" files in an Arc
 
 ## To Do  
 * Add file upload  
-* Add DB and detailed pages  
+* Style  
 * Test  
 * Deploy  
