@@ -8,7 +8,15 @@ import os
 import sys
 from lxml import etree, objectify
 
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = set(['xml'])
+
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def convert_size(size):
     # convert size to human-readable form
@@ -125,15 +133,34 @@ def mets_to_list_of_dicts(mets_path):
 
     return original_files
 
-# path to METS file
-mets_path = 'uploads/METS.9ca30b17-004a-4447-803a-b99ca6d24612.xml'
+original_files = []
 
-# create list of dicts from METS file
-original_files = mets_to_list_of_dicts(mets_path)
-
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
-    return render_template('mets-view.html', original_files = original_files)
+    return render_template('upload.html')
+
+
+@app.route('/mets-view', methods = ['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return render_template('upload.html')
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return render_template('upload.html')
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            mets_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            global original_files
+            original_files = mets_to_list_of_dicts(mets_path)
+            return render_template('originalfiles.html', original_files = original_files)
+
 
 @app.route('/file/<UUID>')
 def show_file(UUID):
