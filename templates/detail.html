@@ -21,21 +21,22 @@
 <p><strong>Version:</strong> {{ original_file['version'] }}</p>
 <p><strong>PRONOM ID (PUID):</strong> {{ original_file['puid']|safe }}</p>
 <p><strong>amdSec ID:</strong> {{ original_file['amdsec_id'] }}</p>
+<p><strong>SHA256 hash:</strong> {{ original_file['sha256'] }}</p>
 
 <h3>Detailed identification</h3>
 <div class="well">
-<h4>Exiftool</h4>
+<h4>--Exiftool--</h4>
 <p><strong>Date modified:</strong> {{ original_file['fits_modified'] }}</p>
 <p><strong>Date created:</strong> {{ original_file['fits_created'] }}</p>
 <p><strong>Format:</strong> {{ original_file['exiftool_format'] }}</p>
 <p><strong>MIME Type:</strong> {{ original_file['exiftool_mimetype'] }}</p>
 
-<h4>MediaInfo</h4>
+<h4>--MediaInfo--</h4>
 <p><strong>Date modified:</strong> {{ original_file['mediainfo_modified'] }}</p>
 <p><strong>Format:</strong> {{ original_file['mediainfo_format'] }}</p>
 <p><strong>MIME Type:</strong> {{ original_file['mediainfo_mimetype'] }}</p>
 
-<h4>File Utility</h4>
+<h4>--File Utility--</h4>
 <p><strong>Format:</strong> {{ original_file['fileutil_format'] }}</p>
 <p><strong>MIME Type:</strong> {{ original_file['fileutil_mimetype'] }}</p>
 </div>
