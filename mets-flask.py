@@ -51,9 +51,9 @@ def mets_to_list_of_dicts(mets_path):
                     ('fileutil_format', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/toolOutput/tool[@name="file utility"]/fileUtilityOutput/format'), 
                     ('exiftool_mimetype', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/RDF/Description/MIMEType'), 
                     ('exiftool_format', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/RDF/Description/FileType'), 
-                    ('mediainfo_modified', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/Mediainfo/File/track[@type="general"]/File_last_modification_date__local_'), 
-                    ('mediainfo_mimetype', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/Mediainfo/File/track[@type="general"]/Internet_media_type'), 
-                    ('mediainfo_format', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/Mediainfo/File/track[@type="general"]/Format'))
+                    ('mediainfo_modified', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/Mediainfo/File/track[@type="General"]/File_last_modification_date__local_'), 
+                    ('mediainfo_mimetype', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/Mediainfo/File/track[@type="General"]/Internet_media_type'), 
+                    ('mediainfo_format', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/Mediainfo/File/track[@type="General"]/Format'))
     xml_file_elements = collections.OrderedDict(xml_file_elements)
 
     # build xml document root
