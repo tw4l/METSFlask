@@ -5,7 +5,7 @@
 Flask application for viewing detailed information on "original" files in an Archivematica METS file.  
 
 ## Install (dev)
-* `git clone https://github.com/timothyryanwalsh/METSFlask && cd MetsFlask`  
+* `git clone https://github.com/timothyryanwalsh/METSFlask && cd METSFlask`  
 * `virtualenv venv`  
 * `source venv/bin/activate`  
 * `pip install Flask`  
@@ -14,7 +14,9 @@ Flask application for viewing detailed information on "original" files in an Arc
 * `flask run`  
 
 ## To Do    
-* Add info about preservation derivative to detail page  
+* Add agent info to PREMIS Events in detail page  
+* Add info about preservation derivative to detail page?  
+* Add more tool-specific extracted metadata to detail page  
 * Style  
 * Test  
 * Deploy  
