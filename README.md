@@ -15,7 +15,6 @@ Flask application for viewing detailed information on "original" files in an Arc
 
 ## To Do  
 * Add file upload (currently reads only from one particular METS file in "uploads" dir)   
-* Add PREMIS events info to detail page  
 * Add info about preservation derivative to detail page  
 * Style  
 * Test  
