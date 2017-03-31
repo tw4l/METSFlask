@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>METS-Flask</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<h2>UUID: {{ original_file['uuid'] }}</h2>
+
+<h3>General details</h3>
+<p>Filepath: {{ original_file['filepath'] }}</p>
+<p>Size (human-readable): {{ original_file['size'] }}</p>
+<p>Size (bytes): {{ original_file['bytes'] }}</p>
+<p>File format: {{ original_file['format'] }}</p>
+<p>Version: {{ original_file['version'] }}</p>
+<p>PRONOM ID (PUID): {{ original_file['puid'] }}</p>
+<p>amdSec ID: {{ original_file['amdsec_id'] }}</p>
+
+<h3>Exiftool</h3>
+<p>Date modified: {{ original_file['fits_modified'] }}</p>
+<p>Date created: {{ original_file['fits_created'] }}</p>
+<p>Format: {{ original_file['exiftool_format'] }}</p>
+<p>MIME Type: {{ original_file['exiftool_mimetype'] }}</p>
+
+<h3>MediaInfo</h3>
+<p>Date modified: {{ original_file['mediainfo_modified'] }}</p>
+<p>Format: {{ original_file['mediainfo_format'] }}</p>
+<p>MIME Type: {{ original_file['mediainfo_mimetype'] }}</p>
+
+<h3>File Utility</h3>
+<p>Format: {{ original_file['fileutil_format'] }}</p>
+<p>MIME Type: {{ original_file['fileutil_mimetype'] }}</p>
+
+</body>
+</html>
