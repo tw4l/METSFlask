@@ -13,8 +13,7 @@ Flask application for viewing detailed information on "original" files in an Arc
 * `export FLASK_APP=metsflask.py`   
 * `flask run`  
 
-## To Do  
-* Add file upload (currently reads only from one particular METS file in "uploads" dir)   
+## To Do    
 * Add info about preservation derivative to detail page  
 * Style  
 * Test  
