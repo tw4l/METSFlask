@@ -140,7 +140,7 @@ def index():
     return render_template('upload.html')
 
 
-@app.route('/mets-view', methods = ['GET', 'POST'])
+@app.route('/originalfiles', methods = ['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
