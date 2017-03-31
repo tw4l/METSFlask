@@ -173,3 +173,6 @@ def show_file(UUID):
             break
     return render_template('detail.html', original_file=target_original_file, aip_name = aip_name)
 
+if __name__ == '__main__':
+    app.run()
+
