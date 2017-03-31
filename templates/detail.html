@@ -22,20 +22,23 @@
 <p><strong>PRONOM ID (PUID):</strong> {{ original_file['puid']|safe }}</p>
 <p><strong>amdSec ID:</strong> {{ original_file['amdsec_id'] }}</p>
 
-<h3>Exiftool</h3>
+<h3>Detailed identification</h3>
+<div class="well">
+<h4>Exiftool</h4>
 <p><strong>Date modified:</strong> {{ original_file['fits_modified'] }}</p>
 <p><strong>Date created:</strong> {{ original_file['fits_created'] }}</p>
 <p><strong>Format:</strong> {{ original_file['exiftool_format'] }}</p>
 <p><strong>MIME Type:</strong> {{ original_file['exiftool_mimetype'] }}</p>
 
-<h3>MediaInfo</h3>
+<h4>MediaInfo</h4>
 <p><strong>Date modified:</strong> {{ original_file['mediainfo_modified'] }}</p>
 <p><strong>Format:</strong> {{ original_file['mediainfo_format'] }}</p>
 <p><strong>MIME Type:</strong> {{ original_file['mediainfo_mimetype'] }}</p>
 
-<h3>File Utility</h3>
+<h4>File Utility</h4>
 <p><strong>Format:</strong> {{ original_file['fileutil_format'] }}</p>
 <p><strong>MIME Type:</strong> {{ original_file['fileutil_mimetype'] }}</p>
+</div>
 
 <h3>PREMIS Events</h3>
 <div class="well">
