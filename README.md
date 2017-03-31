@@ -13,7 +13,7 @@ Flask application for viewing detailed information on "original" files in an Arc
 * `flask run`  
 
 ## To Do  
-* Add file upload  
-* Style  
+* Add file upload (currently reads only from one particular METS file in "uploads" dir)   
+* Style  
 * Test  
 * Deploy  
