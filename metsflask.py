@@ -65,20 +65,50 @@ def mets_to_list_of_dicts(mets_path):
         # create new dictionary for this item's info
         file_data = {}
 
+        # create new list of dicts for premis events in file_data
+        file_data['premis_events'] = []
+
         # gather amdsec id from filesec
         amdsec_id = target.attrib['ADMID']
         file_data['amdsec_id'] = amdsec_id
             
         # parse each amdSec 
         amdsec_xpath = ".//amdSec[@ID='%s']" % (amdsec_id)
-        for target in mets_root.findall(amdsec_xpath):
+        for target1 in mets_root.findall(amdsec_xpath):
             
             # iterate over elements and write key, value for each to file_data dictionary
             for key, value in xml_file_elements.items():
                 try:
-                    file_data['%s' % key] = target.find(value).text
+                    file_data['%s' % (key)] = target1.find(value).text
                 except AttributeError:
-                    file_data['%s' % key] = ''
+                    file_data['%s' % (key)] = ''
+
+            # parse info for each PREMIS event associated with amdSec
+            premis_event_xpath = ".//digiprovMD/mdWrap[@MDTYPE='PREMIS:EVENT']"
+            for target2 in target1.findall(premis_event_xpath):
+
+                # create dict to store data
+                premis_event = {}
+
+                # create dict for names and xpaths of desired elements
+                premis_key_values = {
+                    'event_uuid': './xmlData/event/eventIdentifier/eventIdentifierValue', 
+                    'event_type': './xmlData/event/eventType', 
+                    'event_datetime': './xmlData/event/eventDateTime', 
+                    'event_outcome': './xmlData/event/eventOutcomeInformation/eventOutcome', 
+                    'event_detail': './xmlData/event/eventOutcomeInformation/eventOutcomeDetail/eventOutcomeDetailNote' 
+                }
+
+                # iterate over elements and write key, value for each to premis_event dictionary
+                for key, value in premis_key_values.items():
+                    try:
+                        premis_event['%s' % (key)] = target2.find(value).text
+                    except AttributeError:
+                        premis_event['%s' % (key)] = ''
+
+                # write premis_event dict to file_data
+                file_data['premis_events'].append(premis_event)
+
 
         # format filepath
         file_data['filepath'] = file_data['filepath'].replace('%transferDirectory%', '')

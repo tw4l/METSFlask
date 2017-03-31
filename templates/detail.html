@@ -37,5 +37,16 @@
 <p><strong>Format:</strong> {{ original_file['fileutil_format'] }}</p>
 <p><strong>MIME Type:</strong> {{ original_file['fileutil_mimetype'] }}</p>
 
+<h3>PREMIS Events</h3>
+
+{% for premis_event in original_file['premis_events'] %}
+<br>
+<h4>Event UUID: {{ premis_event['event_uuid'] }}</h4>
+<p><strong>Event type:</strong> {{ premis_event['event_type'] }}</p>
+<p><strong>Event datetime:</strong> {{ premis_event['event_datetime'] }}</p>
+<p><strong>Event outcome:</strong> {{ premis_event['event_outcome'] }}</p>
+<p><strong>Event detail:</strong> {{ premis_event['event_detail'] }}</p>
+
+{% endfor %}
 </body>
 </html>
