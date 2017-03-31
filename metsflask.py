@@ -158,7 +158,8 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             mets_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             global original_files
-            original_files = mets_to_list_of_dicts(mets_path)
+            original_files = mets_to_list_of_dicts(mets_path) # write details to global original_files list of dicts
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # delte file from uploads folder
             return render_template('originalfiles.html', original_files = original_files)
 
 
