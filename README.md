@@ -14,7 +14,8 @@ Flask application for viewing detailed information on "original" files in an Arc
 * `flask run`  
 
 ## To Do    
-* Add info about preservation derivative to detail page?  
+* Add agent info to PREMIS Events in detail page  
+* Add info about preservation derivative to detail page?  
 * Add more tool-specific extracted metadata to detail page  
 * Style  
 * Test  
