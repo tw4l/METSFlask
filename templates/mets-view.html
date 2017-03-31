@@ -9,7 +9,6 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script src="static/sorttable.js"></script>
-    <link rel="stylesheet" href="app.css">
 </head>
 <body>
 <h1>METS-Flask</h1>
@@ -27,7 +26,7 @@
 {% if original_files %}
     {% for original_file in original_files %}
         <tr>
-          <td>LINK</td>
+          <td><a href="/file/{{ original_file['uuid'] }}" target="_blank">Link</a></td>
           <td>{{ original_file['filepath'] }}</td>
           <td>{{ original_file['uuid'] }}</td>
           <td>{{ original_file['bytes'] }}</td>
