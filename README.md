@@ -5,7 +5,7 @@
 Flask application for viewing detailed information on "original" files in an Archivematica METS file.  
 
 ## Install (dev)
-* `git clone https://github.com/timothyryanwalsh/METSFlask && cd MetsFlask`  
+* `git clone https://github.com/timothyryanwalsh/METSFlask && cd METSFlask`  
 * `virtualenv venv`  
 * `source venv/bin/activate`  
 * `pip install Flask`  
