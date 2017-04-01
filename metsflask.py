@@ -103,8 +103,9 @@ def mets_to_list_of_dicts(mets_path):
                     'event_uuid': './xmlData/event/eventIdentifier/eventIdentifierValue', 
                     'event_type': './xmlData/event/eventType', 
                     'event_datetime': './xmlData/event/eventDateTime', 
+                    'event_detail': './xmlData/event/eventDetail', 
                     'event_outcome': './xmlData/event/eventOutcomeInformation/eventOutcome', 
-                    'event_detail': './xmlData/event/eventOutcomeInformation/eventOutcomeDetail/eventOutcomeDetailNote' 
+                    'event_detail_note': './xmlData/event/eventOutcomeInformation/eventOutcomeDetail/eventOutcomeDetailNote' 
                 }
 
                 # iterate over elements and write key, value for each to premis_event dictionary
@@ -113,6 +114,30 @@ def mets_to_list_of_dicts(mets_path):
                         premis_event['%s' % (key)] = target2.find(value).text
                     except AttributeError:
                         premis_event['%s' % (key)] = ''
+
+                # create list of dicts for PREMIS Agents associated with Events
+                premis_agents = []
+
+                # parse info for each PREMIS Agent pair associated with Event
+                premis_event_xpath = ".//xmlData/event/linkingAgentIdentifier"
+                for target3 in target2.findall(premis_event_xpath):
+
+                    premis_agent = {}
+                    try:
+                        premis_agent['agent_type'] = target3.find('./linkingAgentIdentifierType').text
+                    except AttributeError:
+                        premis_agent['agent_type'] = ''
+
+                    try:
+                        premis_agent['agent_value'] = target3.find('./linkingAgentIdentifierValue').text
+                    except AttributeError:
+                        premis_agent['agent_value'] = ''
+
+                    # append PREMIS Agent pair to premis_agents
+                    premis_agents.append(premis_agent)
+
+                # write premis_agents to premis_events
+                premis_event['premis_agents'] = premis_agents
 
                 # write premis_event dict to file_data
                 file_data['premis_events'].append(premis_event)

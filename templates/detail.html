@@ -55,8 +55,15 @@
 <h4>Event UUID: {{ premis_event['event_uuid'] }}</h4>
 <p><strong>Event type:</strong> {{ premis_event['event_type'] }}</p>
 <p><strong>Event datetime:</strong> {{ premis_event['event_datetime'] }}</p>
-<p><strong>Event outcome:</strong> {{ premis_event['event_outcome'] }}</p>
 <p><strong>Event detail:</strong> {{ premis_event['event_detail'] }}</p>
+<p><strong>Event outcome:</strong> {{ premis_event['event_outcome'] }}</p>
+<p><strong>Event detail note:</strong> {{ premis_event['event_detail_note'] }}</p>
+  {% for premis_agent in premis_event['premis_agents'] %}
+    <p><strong>PREMIS Agent</strong></p>
+    <p>Agent type: {{ premis_agent['agent_type'] }}</p>
+    <p>Agent value: {{ premis_agent['agent_value'] }}</p>
+  {% endfor %}
+<br>
 {% endfor %}
 </div>
 </div>
