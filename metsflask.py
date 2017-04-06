@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, render_template, flash
+from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 
 import collections
@@ -13,6 +14,20 @@ ALLOWED_EXTENSIONS = set(['xml'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+db = SQLAlchemy(app)
+
+class METS(db.model):
+    id = db.Column(db.Integer, primary_key=True)
+    metsfile = db.Column(db.String(120), unique=True)
+    metsdict = db.Column(PickleType)
+
+    def __init__(self, metsfile, metsdict):
+        self.metsfile = metsfile
+        self.metsdict = metsdict
+
+    def __repr__(self):
+        return '<File %r>' % self.metsfile
 
 def allowed_file(filename):
     return '.' in filename and \
