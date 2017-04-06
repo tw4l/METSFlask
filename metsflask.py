@@ -17,6 +17,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 db = SQLAlchemy(app)
 
+db.create_all()
+
 class METS(db.model):
     id = db.Column(db.Integer, primary_key=True)
     metsfile = db.Column(db.String(120), unique=True)
@@ -47,6 +49,9 @@ def convert_size(size):
 def mets_to_list_of_dicts(mets_path):
     # create list
     original_files = []
+
+    # get METS file name
+    mets_filename = os.path.basename(mets_path)
 
     # open xml file and strip namespaces
     tree = etree.parse(mets_path)
@@ -170,14 +175,13 @@ def mets_to_list_of_dicts(mets_path):
         # add file_data to list
         original_files.append(file_data)
 
-
-    return original_files
-
-original_files = []
+    mets_instance = METS('%s' % (mets_filename), original_files)
+    db.session.add(mets_instance)
+    db.session.commit()
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    return render_template('upload.html')
+    return render_template('upload.html', )
 
 
 @app.route('/originalfiles', methods=['GET', 'POST'])
@@ -214,5 +218,5 @@ def show_file(UUID):
     return render_template('detail.html', original_file=target_original_file, aip_name = aip_name)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
