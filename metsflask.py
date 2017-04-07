@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 
 db.create_all()
 
-class METS(db.model):
+class METS(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     metsfile = db.Column(db.String(120), unique=True)
     metsdict = db.Column(PickleType)
