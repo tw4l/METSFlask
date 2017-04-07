@@ -22,11 +22,11 @@ db.create_all()
 class METS(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     metsfile = db.Column(db.String(120), unique=True)
-    metsdict = db.Column(PickleType)
+    metslist = db.Column(db.PickleType)
 
-    def __init__(self, metsfile, metsdict):
+    def __init__(self, metsfile, metslist):
         self.metsfile = metsfile
-        self.metsdict = metsdict
+        self.metslist = metslist
 
     def __repr__(self):
         return '<File %r>' % self.metsfile
