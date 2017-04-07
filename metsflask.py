@@ -181,7 +181,8 @@ def mets_to_list_of_dicts(mets_path):
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    return render_template('upload.html', )
+    mets_instances = db.session.query(METS).all()
+    return render_template('upload.html', mets_instances = mets_instances)
 
 
 @app.route('/originalfiles', methods=['GET', 'POST'])
