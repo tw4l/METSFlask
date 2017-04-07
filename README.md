@@ -12,6 +12,9 @@ Flask application for viewing detailed information on "original" files in an Arc
 * `pip install lxml` 
 * `pip install Flask-SQLAlchemy`  
 * `export FLASK_APP=metsflask.py`   
+* Create database (in Python interpreter):  
+`>>> from metsflask import db`  
+`>>> db.create_all()`  
 * `flask run`  
 
 ## To Do    
