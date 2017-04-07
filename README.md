@@ -10,7 +10,7 @@ Flask application for viewing detailed information on "original" files in an Arc
 * `source venv/bin/activate`  
 * `pip install Flask`  
 * `pip install lxml` 
-* `pip install Flask-SQLAlchemy1`  
+* `pip install Flask-SQLAlchemy`  
 * `export FLASK_APP=metsflask.py`   
 * `flask run`  
 
