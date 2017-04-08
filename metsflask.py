@@ -17,8 +17,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 db = SQLAlchemy(app)
 
-db.create_all()
-
 class METS(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     metsfile = db.Column(db.String(120), unique=True)
