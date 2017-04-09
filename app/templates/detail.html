@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>File UUID: {{ original_file['uuid'] }}</h3>
+<p><strong>METS File:</strong> {{ aip_name }}</p>
+
+<h3>General details</h3>
+<p><strong>Filepath:</strong> {{ original_file['filepath'] }}</p>
+<p><strong>Size (human-readable):</strong> {{ original_file['size'] }}</p>
+<p><strong>Size (bytes):</strong> {{ original_file['bytes'] }}</p>
+<p><strong>File format:</strong> {{ original_file['format'] }}</p>
+<p><strong>Version:</strong> {{ original_file['version'] }}</p>
+<p><strong>PRONOM ID (PUID):</strong> {{ original_file['puid']|safe }}</p>
+<p><strong>amdSec ID:</strong> {{ original_file['amdsec_id'] }}</p>
+<p><strong>SHA256 hash:</strong> {{ original_file['sha256'] }}</p>
+
+<h3>Detailed identification</h3>
+<div class="well">
+<h4>--ExifTool--</h4>
+<p><strong>Date modified:</strong> {{ original_file['fits_modified'] }}</p>
+<p><strong>Date created:</strong> {{ original_file['fits_created'] }}</p>
+<p><strong>Format:</strong> {{ original_file['exiftool_format'] }}</p>
+<p><strong>MIME Type:</strong> {{ original_file['exiftool_mimetype'] }}</p>
+
+<h4>--MediaInfo--</h4>
+<p><strong>Date modified:</strong> {{ original_file['mediainfo_modified'] }}</p>
+<p><strong>Format:</strong> {{ original_file['mediainfo_format'] }}</p>
+<p><strong>MIME Type:</strong> {{ original_file['mediainfo_mimetype'] }}</p>
+
+<h4>--File Utility--</h4>
+<p><strong>Format:</strong> {{ original_file['fileutil_format'] }}</p>
+<p><strong>MIME Type:</strong> {{ original_file['fileutil_mimetype'] }}</p>
+</div>
+
+<h3>PREMIS Events</h3>
+<div class="well">
+{% for premis_event in original_file['premis_events'] %}
+<h4>Event UUID: {{ premis_event['event_uuid'] }}</h4>
+<p><strong>Event type:</strong> {{ premis_event['event_type'] }}</p>
+<p><strong>Event datetime:</strong> {{ premis_event['event_datetime'] }}</p>
+<p><strong>Event detail:</strong> {{ premis_event['event_detail'] }}</p>
+<p><strong>Event outcome:</strong> {{ premis_event['event_outcome'] }}</p>
+<p><strong>Event detail note:</strong> {{ premis_event['event_detail_note'] }}</p>
+  {% for premis_agent in premis_event['premis_agents'] %}
+    <p><strong>PREMIS Agent</strong></p>
+    <p>Agent type: {{ premis_agent['agent_type'] }}</p>
+    <p>Agent value: {{ premis_agent['agent_value'] }}</p>
+  {% endfor %}
+<br>
+{% endfor %}
+</div>
+{% endblock %}

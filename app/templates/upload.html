@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h3>A web application for human-friendly exploration of Archivematica METS files</h3>
+  <div class="well">
+    <p>Upload a file below to begin exploring. To explore a different METS file, return to this page by clicking on "METSFlask" in the navbar and upload a new file.</p>
+  </div>
+  <br>
+  <h4>Upload a METS XML file:</h4>
+  <form action = "/index" method="POST" enctype="multipart/form-data">
+     <input type="file" name ="file"/>
+     <br>
+     <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}
