@@ -15,7 +15,7 @@ Flask application for viewing detailed information on "original" files in an Arc
 * `export FLASK_APP=metsflask.py`   
 * Create database:  
 `chmod a+x db_create.py`  
-`chmod a+x db_migrate.py`  
-`./db_create.py`  
-`./db_migrate.py`  
+`chmod a+x db_migrate.py`   
+`./db_create.py`   
+`./db_migrate.py`   
 * `flask run`  
