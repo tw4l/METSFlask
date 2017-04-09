@@ -11,12 +11,9 @@ import os
 import sys
 from lxml import etree, objectify
 
-UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = set(['xml'])
-
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 def convert_size(size):
     # convert size to human-readable form
