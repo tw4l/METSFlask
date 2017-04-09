@@ -195,11 +195,25 @@ def upload_file():
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # delte file from uploads folder
             return render_template('uploadsuccess.html')
 
+
 @app.route('/aip/<mets_file>')
 def show_aip(mets_file):
     mets_instances = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
     original_files = mets_instances.metslist
     return render_template('aip.html', original_files=original_files, mets_file=mets_file)
+
+
+@app.route('/delete/<mets_file>')
+def confirm_delete_aip(mets_file):
+    return render_template('delete.html', mets_file=mets_file)
+
+@app.route('/deletesuccess/<mets_file>')
+def delete_aip(mets_file):
+    mets_instance = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
+    db.session.delete(mets_instance)
+    db.session.commit()
+    return render_template('deletesuccess.html')
+
 
 @app.route('/aip/<mets_file>/file/<UUID>')
 def show_file(mets_file, UUID):

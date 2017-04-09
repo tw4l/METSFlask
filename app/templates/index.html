@@ -7,13 +7,13 @@
   <table class="table table-striped table-bordered table-condensed sortable">
   <tr>
   <td><strong>METS File</strong></td>
-  <td><strong>View AIP details</strong></td>
+  <td><strong>Actions</strong></td>
   </tr>
   {% if mets_instances %}
     {% for mets_instance in mets_instances %}
       <tr>
         <td>{{ mets_instance.metsfile }}</td>
-        <td><a href="/aip/{{ mets_instance.metsfile }}" target="_blank">Link</a></td>
+        <td><a href="/aip/{{ mets_instance.metsfile }}"><button class="btn btn-primary">View</button></a> <a href="/delete/{{ mets_instance.metsfile }}"><button class="btn btn-danger">Delete</button></a></td>
       </tr>
     {% endfor %}
   {% endif %}
