@@ -22,7 +22,7 @@
           <td>{{ original_file['puid']|safe }}</td>
           <td>{{ original_file['bytes'] }}</td>
           <td>{{ original_file['uuid'] }}</td>
-          <td><a href="/file/{{ original_file['uuid'] }}" target="_blank">Link</a></td>
+          <td><a href="/aip/{{ mets_file }}/file/{{ original_file['uuid'] }}" target="_blank">Link</a></td>
         </tr>
     {% endfor %}
     </table>

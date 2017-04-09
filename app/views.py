@@ -172,6 +172,8 @@ def index():
 def render_page():
     return render_template('upload.html')
 
+
+@app.route('/uploadsuccess', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -191,14 +193,20 @@ def upload_file():
             aip_name = os.path.basename(filename)
             original_files = mets_to_list_of_dicts(mets_path) # write details to global original_files list of dicts
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # delte file from uploads folder
-            return render_template('index.html')
+            return render_template('uploadsuccess.html')
 
-#@app.route('/originalfiles', methods=['GET', 'POST'])
+@app.route('/aip/<mets_file>')
+def show_aip(mets_file):
+    mets_instances = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
+    original_files = mets_instances.metslist
+    return render_template('aip.html', original_files=original_files, mets_file=mets_file)
 
-@app.route('/file/<UUID>')
-def show_file(UUID):
+@app.route('/aip/<mets_file>/file/<UUID>')
+def show_file(mets_file, UUID):
+    mets_instances = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
+    original_files = mets_instances.metslist
     for original_file in original_files:
         if original_file["uuid"] == UUID:
             target_original_file = original_file
             break
-    return render_template('detail.html', original_file=target_original_file, aip_name = aip_name)
+    return render_template('detail.html', original_file=target_original_file, mets_file=mets_file)
