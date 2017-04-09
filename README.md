@@ -22,4 +22,5 @@ Flask application for viewing detailed information on "original" files in an Arc
 
 ## To do
 * Styling  
-* Prevent user from attempting to upload same file more than once
+* Prevent user from attempting to upload same file more than once  
+* Add dates to AIP view (which dates?)  
