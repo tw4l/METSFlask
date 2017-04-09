@@ -19,3 +19,7 @@ Flask application for viewing detailed information on "original" files in an Arc
 `./db_create.py`  
 `./db_migrate.py`  
 * `flask run`  
+
+## To do
+* Styling  
+* Prevent user from attempting to upload same file more than once
