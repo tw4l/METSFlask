@@ -13,7 +13,9 @@ Flask application for viewing detailed information on "original" files in an Arc
 * `pip install Flask-SQLAlchemy`  
 * `pip install sqlalchemy-migrate`
 * `export FLASK_APP=metsflask.py`   
-* Create database (in Python interpreter):  
-`python db_create.py`  
-`python db_migrate.py`  
+* Create database:  
+`chmod a+x db_create.py`  
+`chmod a+x db_migrate.py`  
+`./db_create.py`  
+`./db_migrate.py`  
 * `flask run`  
