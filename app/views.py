@@ -26,7 +26,7 @@ def convert_size(size):
     s = s.replace('.0', '')
     return '%s %s' % (s,size_name[i])
 
-def mets_to_list_of_dicts(mets_path):
+def mets_to_list_of_dicts(mets_path, nickname):
     # create list
     original_files = []
 
@@ -155,7 +155,7 @@ def mets_to_list_of_dicts(mets_path):
         # add file_data to list
         original_files.append(file_data)
 
-    mets_instance = METS('%s' % (mets_filename), original_files)
+    mets_instance = METS('%s' % (mets_filename), nickname, original_files)
     db.session.add(mets_instance)
     db.session.commit()
 
@@ -173,6 +173,7 @@ def render_page():
 @app.route('/uploadsuccess', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
+        nickname = request.form.get("nickname")
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
@@ -188,8 +189,8 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             mets_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             aip_name = os.path.basename(filename)
-            original_files = mets_to_list_of_dicts(mets_path) # write details to global original_files list of dicts
-            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # delte file from uploads folder
+            original_files = mets_to_list_of_dicts(mets_path, nickname) # write details to db
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # delete file from uploads folder
             return render_template('uploadsuccess.html')
 
 
