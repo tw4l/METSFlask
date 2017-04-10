@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<p><strong>METS File:</strong> {{ mets_file }}</p>
+<p>Are you sure you want to delete METS file?</p>
+<a href="/deletesuccess/{{ mets_file }}"><button class="btn btn-danger">Yes, really delete!</button></a>
+{% endblock %}
