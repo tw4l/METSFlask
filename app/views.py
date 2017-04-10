@@ -186,6 +186,8 @@ def upload_file():
             return render_template('upload.html')
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            if not os.path.exists(app.config['UPLOAD_FOLDER']):
+                os.makedirs(app.config['UPLOAD_FOLDER'])
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             mets_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             aip_name = os.path.basename(filename)
