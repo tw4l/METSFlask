@@ -15,7 +15,7 @@ Flask application for viewing detailed information on "original" files in an Arc
 `chmod a+x db_migrate.py`   
 `./db_create.py`  
 `./db_migrate.py`  
-* `flask run`  
+* `./run.py`  
 
 ## To do
 * Styling  
