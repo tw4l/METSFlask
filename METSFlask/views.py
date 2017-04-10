@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, render_template, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
-from app import app, db
+from METSFlask import app, db
 from .models import METS
 
 import collections

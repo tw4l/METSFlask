@@ -1,4 +1,4 @@
-from app import db
+from METSFlask import db
 
 class METS(db.Model):
     id = db.Column(db.Integer, primary_key=True)
