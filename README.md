@@ -8,10 +8,7 @@ Flask application for viewing detailed information on "original" files in an Arc
 * `git clone https://github.com/timothyryanwalsh/METSFlask && cd METSFlask`  
 * `virtualenv venv`  
 * `source venv/bin/activate`  
-* `pip install Flask`  
-* `pip install lxml` 
-* `pip install Flask-SQLAlchemy`  
-* `pip install sqlalchemy-migrate`
+* `pip install -r requirements.txt`  
 * `export FLASK_APP=metsflask.py`   
 * Create database:  
 `chmod a+x db_create.py`  
