@@ -5,6 +5,7 @@ from METSFlask import app, db
 from .models import METS
 
 import collections
+import datetime
 import fnmatch
 import math
 import os
@@ -53,6 +54,7 @@ def mets_to_list_of_dicts(mets_path, nickname):
                     ('format', './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatDesignation/formatName'), 
                     ('version', './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatDesignation/formatVersion'), 
                     ('puid', './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatRegistry/formatRegistryKey'), 
+                    ('fits_modified_unixtime', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/fileinfo/fslastmodified[@toolname="OIS File Information"]'), 
                     ('fits_modified', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/toolOutput/tool[@name="Exiftool"]/exiftool/FileModifyDate'), 
                     ('fits_created', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/fileinfo/created[@toolname="Exiftool"]'), 
                     ('fileutil_mimetype', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/toolOutput/tool[@name="file utility"]/fileUtilityOutput/mimetype'), 
@@ -151,6 +153,10 @@ def mets_to_list_of_dicts(mets_path, nickname):
 
         # create human-readable size
         file_data['size'] = convert_size(file_data['bytes'])
+
+        # create human-readable version of last modified Unix time stamp
+        unixtime = int(file_data['fits_modified_unixtime'])/1000
+        file_data['modified_ois'] = datetime.datetime.fromtimestamp(unixtime).isoformat()
 
         # add file_data to list
         original_files.append(file_data)
