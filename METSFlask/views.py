@@ -154,9 +154,10 @@ def mets_to_list_of_dicts(mets_path, nickname):
         # create human-readable size
         file_data['size'] = convert_size(file_data['bytes'])
 
-        # create human-readable version of last modified Unix time stamp
-        unixtime = int(file_data['fits_modified_unixtime'])/1000
-        file_data['modified_ois'] = datetime.datetime.fromtimestamp(unixtime).isoformat()
+        # create human-readable version of last modified Unix time stamp (if file was characterized by FITS)
+        if file_data['fits_modified_unixtime']:
+            unixtime = int(file_data['fits_modified_unixtime'])/1000 # convert milliseconds to seconds
+            file_data['modified_ois'] = datetime.datetime.fromtimestamp(unixtime).isoformat() # cconvert from unix to iso8601
 
         # add file_data to list
         original_files.append(file_data)
