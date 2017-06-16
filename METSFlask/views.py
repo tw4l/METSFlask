@@ -69,7 +69,7 @@ def mets_to_list_of_dicts(mets_path, nickname):
     # build xml document root
     mets_root = root
 
-    # gather info for each file in filegroup "original" and write to files.csv
+    # gather info for each file in filegroup "original"
     for target in mets_root.findall(".//fileGrp[@USE='original']/file"):
             
         # create new dictionary for this item's info
