@@ -23,6 +23,7 @@ All files uploaded to METSFlask are deleted after being read into the database. 
 `./db_create.py`  
 * Run (on localhost, port 5000):  
 `./run.py`  
+* Go to `localhost:5000` in browser.  
 
 ## Dates
 
