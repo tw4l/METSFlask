@@ -9,6 +9,7 @@
   <td><strong>Version</strong></td>
   <td><strong>PUID</strong></td>
   <td><strong>Size (bytes)</strong></td>
+  <td><strong>Last modified</strong></td>
   <td><strong>UUID</strong></td>
   <td><strong>Details</strong></td>
 </tr>
@@ -21,6 +22,7 @@
           <td>{{ original_file['version'] }}</td>
           <td>{{ original_file['puid']|safe }}</td>
           <td>{{ original_file['bytes'] }}</td>
+          <td>{{ original_file['modified_ois'] }}</td>
           <td>{{ original_file['uuid'] }}</td>
           <td><a href="/aip/{{ mets_file }}/file/{{ original_file['uuid'] }}" target="_blank"><button class="btn btn-primary">View</button></a></td>
         </tr>

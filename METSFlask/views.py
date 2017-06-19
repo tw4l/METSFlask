@@ -5,6 +5,7 @@ from METSFlask import app, db
 from .models import METS
 
 import collections
+import datetime
 import fnmatch
 import math
 import os
@@ -53,21 +54,20 @@ def mets_to_list_of_dicts(mets_path, nickname):
                     ('format', './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatDesignation/formatName'), 
                     ('version', './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatDesignation/formatVersion'), 
                     ('puid', './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatRegistry/formatRegistryKey'), 
+                    ('fits_modified_unixtime', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/fileinfo/fslastmodified[@toolname="OIS File Information"]'), 
                     ('fits_modified', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/toolOutput/tool[@name="Exiftool"]/exiftool/FileModifyDate'), 
                     ('fits_created', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/fileinfo/created[@toolname="Exiftool"]'), 
                     ('fileutil_mimetype', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/toolOutput/tool[@name="file utility"]/fileUtilityOutput/mimetype'), 
                     ('fileutil_format', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/toolOutput/tool[@name="file utility"]/fileUtilityOutput/format'), 
                     ('exiftool_mimetype', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/RDF/Description/MIMEType'), 
                     ('exiftool_format', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/RDF/Description/FileType'), 
-                    ('mediainfo_modified', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/Mediainfo/File/track[@type="General"]/File_last_modification_date__local_'), 
-                    ('mediainfo_mimetype', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/Mediainfo/File/track[@type="General"]/Internet_media_type'), 
-                    ('mediainfo_format', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/Mediainfo/File/track[@type="General"]/Format'))
+                    ('exiftool_rawoutput', './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/toolOutput/tool[@name="Exiftool"]/exiftool/rawOutput'))
     xml_file_elements = collections.OrderedDict(xml_file_elements)
 
     # build xml document root
     mets_root = root
 
-    # gather info for each file in filegroup "original" and write to files.csv
+    # gather info for each file in filegroup "original"
     for target in mets_root.findall(".//fileGrp[@USE='original']/file"):
             
         # create new dictionary for this item's info
@@ -151,6 +151,11 @@ def mets_to_list_of_dicts(mets_path, nickname):
 
         # create human-readable size
         file_data['size'] = convert_size(file_data['bytes'])
+
+        # create human-readable version of last modified Unix time stamp (if file was characterized by FITS)
+        if file_data['fits_modified_unixtime']:
+            unixtime = int(file_data['fits_modified_unixtime'])/1000 # convert milliseconds to seconds
+            file_data['modified_ois'] = datetime.datetime.fromtimestamp(unixtime).isoformat() # cconvert from unix to iso8601
 
         # add file_data to list
         original_files.append(file_data)
