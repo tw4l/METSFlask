@@ -25,6 +25,14 @@ All files uploaded to METSFlask are deleted after being read into the database. 
 `./run.py`  
 * Go to `localhost:5000` in browser.  
 
-## Dates
+## Detailed identification and dates
 
-The last modified date used in the AIP table view and detailed item page is captured by the "OIS File Information" tool used by FITS during the "Characterize and extract metadata" job. These dates will appear blank in METSFlask for file types that are not set to be characterized by FITS in your local Archivematica FPR.  
+METSFlask works best when the amdSec for every file in an AIP contains characterization information from FITS. The ExifTool raw output in the "Detailed identification" section of detailed page views and the last modified date used in both the AIP table view and detailed page views rely on FITS information being present in the amdSec. These elements will appear blank in METSFlask for file types that are not set to be characterized by FITS in your local Archivematica FPR.  
+
+Since Archivematica 1.4, FITS is not set as a default Characterization tool for all file types. To enable FITS as a characterization tool for all files (in addition to other more specific tools run on specific file types) in Archivematica 1.6, Artefactual has created an "ensure-fits-characterization" script as part of the [archivematica-devtools repo](https://github.com/artefactual/archivematica-devtools/tree/dev/issue-11019-ensure-fits-characterization).
+
+To enable FITS characterization for all files in Archivematica 1.6, first clone the Archivematica-devtools repo and then:  
+* `cd /path/to/archivematica-devtools`  
+* `git checkout dev/issue-11019-ensure-fits-characterization`  
+* `sudo make install`  
+* `sudo am ensure-fits-characterization`
