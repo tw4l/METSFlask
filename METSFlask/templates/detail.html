@@ -29,7 +29,10 @@
 <p><strong>Format:</strong> {{ original_file['exiftool_format'] }}</p>
 {% endif %}
 {% if original_file['exiftool_mimetype'] %}
-<p><strong>MIME Type:</strong> {{ original_file['exiftool_mimetype'] }}</p>
+<p><strong>MIME type:</strong> {{ original_file['exiftool_mimetype'] }}</p>
+{% endif %}
+{% if original_file['exiftool_rawoutput'] %}
+<p><strong>Raw output:</strong> {{ original_file['exiftool_rawoutput'] }}</p>
 {% endif %}
 
 {% if original_file['mediainfo_modified'] or original_file['mediainfo_format'] or original_file['mediainfo_mimetype'] %}
@@ -42,7 +45,7 @@
 <p><strong>Format:</strong> {{ original_file['mediainfo_format'] }}</p>
 {% endif %}
 {% if original_file['mediainfo_mimetype'] %}
-<p><strong>MIME Type:</strong> {{ original_file['mediainfo_mimetype'] }}</p>
+<p><strong>MIME type:</strong> {{ original_file['mediainfo_mimetype'] }}</p>
 {% endif %}
 
 {% if original_file['fileutil_format'] or original_file['fileutil_mimetype'] %}
@@ -52,7 +55,7 @@
 <p><strong>Format:</strong> {{ original_file['fileutil_format'] }}</p>
 {% endif %}
 {% if original_file['fileutil_mimetype'] %}
-<p><strong>MIME Type:</strong> {{ original_file['fileutil_mimetype'] }}</p>
+<p><strong>MIME type:</strong> {{ original_file['fileutil_mimetype'] }}</p>
 {% endif %}
 </div>
 
