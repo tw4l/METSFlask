@@ -33,19 +33,7 @@
 {% endif %}
 {% if original_file['exiftool_rawoutput'] %}
 <p><strong>Raw output:</strong> {{ original_file['exiftool_rawoutput'] }}</p>
-{% endif %}
-
-{% if original_file['mediainfo_modified'] or original_file['mediainfo_format'] or original_file['mediainfo_mimetype'] %}
-<h4>MediaInfo</h4>
-{% endif %}
-{% if original_file['mediainfo_modified'] %}
-<p><strong>Date modified:</strong> {{ original_file['mediainfo_modified'] }}</p>
-{% endif %}
-{% if original_file['mediainfo_format'] %}
-<p><strong>Format:</strong> {{ original_file['mediainfo_format'] }}</p>
-{% endif %}
-{% if original_file['mediainfo_mimetype'] %}
-<p><strong>MIME type:</strong> {{ original_file['mediainfo_mimetype'] }}</p>
+<br>
 {% endif %}
 
 {% if original_file['fileutil_format'] or original_file['fileutil_mimetype'] %}
