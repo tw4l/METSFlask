@@ -5,6 +5,7 @@
 
 <h3>General details</h3>
 <p><strong>Filepath:</strong> {{ original_file['filepath'] }}</p>
+<p><strong>Last modified:</strong> {{ original_file['modified_ois'] }}</p>
 <p><strong>Size (human-readable):</strong> {{ original_file['size'] }}</p>
 <p><strong>Size (bytes):</strong> {{ original_file['bytes'] }}</p>
 <p><strong>File format:</strong> {{ original_file['format'] }}</p>
@@ -12,24 +13,47 @@
 <p><strong>PRONOM ID (PUID):</strong> {{ original_file['puid']|safe }}</p>
 <p><strong>amdSec ID:</strong> {{ original_file['amdsec_id'] }}</p>
 <p><strong>SHA256 hash:</strong> {{ original_file['sha256'] }}</p>
-<p><strong>Last modified:</strong> {{ original_file['modified_ois'] }}</p>
 
 <h3>Detailed identification</h3>
 <div class="well">
-<h4>--ExifTool--</h4>
+{% if original_file['fits_modified'] or original_file['fits_created'] or original_file['exiftool_format'] or original_file['exiftool_mimetype'] %}
+<h4>ExifTool</h4>
+{% endif %}
+{% if original_file['fits_modified'] %}
 <p><strong>Date modified:</strong> {{ original_file['fits_modified'] }}</p>
+{% endif %}
+{% if original_file['fits_created'] %}
 <p><strong>Date created:</strong> {{ original_file['fits_created'] }}</p>
+{% endif %}
+{% if original_file['exiftool_format'] %}
 <p><strong>Format:</strong> {{ original_file['exiftool_format'] }}</p>
+{% endif %}
+{% if original_file['exiftool_mimetype'] %}
 <p><strong>MIME Type:</strong> {{ original_file['exiftool_mimetype'] }}</p>
+{% endif %}
 
-<h4>--MediaInfo--</h4>
+{% if original_file['mediainfo_modified'] or original_file['mediainfo_format'] or original_file['mediainfo_mimetype'] %}
+<h4>MediaInfo</h4>
+{% endif %}
+{% if original_file['mediainfo_modified'] %}
 <p><strong>Date modified:</strong> {{ original_file['mediainfo_modified'] }}</p>
+{% endif %}
+{% if original_file['mediainfo_format'] %}
 <p><strong>Format:</strong> {{ original_file['mediainfo_format'] }}</p>
+{% endif %}
+{% if original_file['mediainfo_mimetype'] %}
 <p><strong>MIME Type:</strong> {{ original_file['mediainfo_mimetype'] }}</p>
+{% endif %}
 
-<h4>--File Utility--</h4>
+{% if original_file['fileutil_format'] or original_file['fileutil_mimetype'] %}
+<h4>File Utility</h4>
+{% endif %}
+{% if original_file['fileutil_format'] %}
 <p><strong>Format:</strong> {{ original_file['fileutil_format'] }}</p>
+{% endif %}
+{% if original_file['fileutil_mimetype'] %}
 <p><strong>MIME Type:</strong> {{ original_file['fileutil_mimetype'] }}</p>
+{% endif %}
 </div>
 
 <h3>PREMIS Events</h3>
