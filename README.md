@@ -2,6 +2,8 @@
 
 A web application for human-friendly exploration of Archivematica METS files.
 
+![demo](metsflask-demo.gif)
+
 ## Live site (try it out!):  
 [http://bitarchivist.pythonanywhere.com/](http://bitarchivist.pythonanywhere.com/)  
 
