@@ -150,7 +150,9 @@ def mets_to_list_of_dicts(mets_path, nickname):
         file_data['puid'] = "<a href=\"http://nationalarchives.gov.uk/PRONOM/%s\" target=\"_blank\">%s</a>" % (file_data['puid'], file_data['puid'])
 
         # create human-readable size
-        file_data['size'] = convert_size(file_data['bytes'])
+        file_data['size'] = '0 bytes'
+        if file_data['bytes'] != '0':
+            file_data['size'] = convert_size(file_data['bytes'])
 
         # create human-readable version of last modified Unix time stamp (if file was characterized by FITS)
         if file_data['fits_modified_unixtime']:
