@@ -41,4 +41,4 @@ To enable FITS characterization for all files in Archivematica 1.6, first clone 
 
 ## PUID links
 
-The table of original files for each AIP and detailed pages for each digital file contain links to PRONOM for particular PUIDs. These links will resolve for all identifications if Siegfried was used as the identification tool. If Fido was used, links to format entries in PRONOM (e.g. "fmt/#" or "x-fmt/#") should resolve; FIDO entries (e.g. "fido-fmt/189.word") will not. 
+The table of original files for each AIP and detailed pages for each digital file contain links to PRONOM for particular PUIDs. These links will resolve for all identifications if Siegfried was used as the identification tool. If Fido was used, links to format entries in PRONOM (e.g. "fmt/#" or "x-fmt/#") should resolve; Fido entries (e.g. "fido-fmt/189.word") will not. 
