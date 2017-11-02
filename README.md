@@ -36,6 +36,7 @@ Since Archivematica 1.4, FITS is not set as a default Characterization tool for 
 To enable FITS characterization for all files in Archivematica 1.6, first clone the Archivematica-devtools repo and then:  
 * `cd /path/to/archivematica-devtools`  
 * `git checkout dev/issue-11019-ensure-fits-characterization`  
+* `sudo apt-get install ruby-ronn` (dependency for archivematica-devtools)  
 * `sudo make install`  
 * `sudo am ensure-fits-characterization`
 
