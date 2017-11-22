@@ -39,7 +39,8 @@ To enable FITS characterization for all files in Archivematica 1.6, first clone 
 * `sudo make install`  
 * `sudo am ensure-fits-characterization`
 
-If you get `ImportError: No module named django` on the last step, activate the relevant venv - in Vagrant-provisioned AM 1.6.1, this is likely /usr/share/python/archivematica-dashboard:  `source /usr/share/python/archivematica-dashboard/bin/activate` 
+If you get `ImportError: No module named django` on the last step, activate the relevant venv - in Vagrant-provisioned AM 1.6.1, this can be done with the following command:  
+`source /usr/share/python/archivematica-dashboard/bin/activate` 
 
 ## PUID links
 
