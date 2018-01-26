@@ -60,9 +60,11 @@ def upload_file():
 
 @app.route('/aip/<mets_file>')
 def show_aip(mets_file):
-    mets_instances = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
-    original_files = mets_instances.metslist
-    return render_template('aip.html', original_files=original_files, mets_file=mets_file)
+    mets_instance = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
+    original_files = mets_instance.metslist
+    dcmetadata = mets_instance.dcmetadata
+    return render_template('aip.html', original_files=original_files, 
+        mets_file=mets_file, dcmetadata=dcmetadata)
 
 
 @app.route('/delete/<mets_file>')
