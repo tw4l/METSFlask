@@ -1,3 +1,6 @@
+from METSFlask import db
+from .models import METS
+
 import collections
 import datetime
 import fnmatch
@@ -6,7 +9,7 @@ import os
 import sys
 from lxml import etree, objectify
 
-from .models import METS
+
 
 
 def convert_size(size):
@@ -69,13 +72,13 @@ class METSFile(object):
 
     def parse_mets(self):
         """
-        Parse METS file and save data to DIP, DigitalFile, and PremisEvent models
+        Parse METS file and save data to METS model
         """
         # create list
         original_files = []
 
         # get METS file name
-        mets_filename = os.path.basename(mets_path)
+        mets_filename = os.path.basename(self.path)
 
         # open xml file and strip namespaces
         tree = etree.parse(self.path)
@@ -179,6 +182,6 @@ class METSFile(object):
         dc_metadata = self.parse_dc(root)
 
         # add file info to database
-        mets_instance = METS('%s' % (mets_filename), self.nickname, original_files, dc_metadata)
+        mets_instance = METS(mets_filename, self.nickname, original_files, dc_metadata)
         db.session.add(mets_instance)
         db.session.commit()

@@ -4,7 +4,7 @@
 {% if dcmetadata %}
 <h3>Dublin Core descriptive metadata</h3>
   {% for element in dcmetadata %}
-    <p><strong>{{ element['element'] }}:</strong> {{ element['tag'}} </p>
+    <p><strong>{{ element['element'].title() }}:</strong> {{ element['value'] }}</p>
   {% endfor %}
 {% endif %}
 <h3>Original files</h3>

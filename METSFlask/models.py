@@ -7,7 +7,7 @@ class METS(db.Model):
     metslist = db.Column(db.PickleType, index=True, unique=True)
     dcmetadata = db.Column(db.PickleType)
 
-    def __init__(self, metsfile, nickname, metslist):
+    def __init__(self, metsfile, nickname, metslist, dcmetadata):
         self.metsfile = metsfile
         self.nickname = nickname
         self.metslist = metslist
