@@ -20,7 +20,7 @@ def convert_size(size):
     return '{} {}'.format(s,size_name[i])
 
 
-class METS(object):
+class METSFile(object):
     """
     Class for METS file parsing methods
     """

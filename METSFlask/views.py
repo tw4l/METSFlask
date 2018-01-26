@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from METSFlask import app, db
 from .models import METS
-from .parsemets import METS, convert_size
+from .parsemets import METSFile, convert_size
 
 import collections
 import datetime
@@ -52,7 +52,7 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             mets_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             aip_name = os.path.basename(filename)
-            mets = METS(mets_path, aip_name, nickname)
+            mets = METSFile(mets_path, aip_name, nickname)
             mets.parse_mets()
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # delete file from uploads folder
             return render_template('uploadsuccess.html')
