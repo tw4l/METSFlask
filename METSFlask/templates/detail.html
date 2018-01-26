@@ -12,7 +12,7 @@
 <p><strong>Version:</strong> {{ original_file['version'] }}</p>
 <p><strong>PRONOM ID (PUID):</strong> {{ original_file['puid']|safe }}</p>
 <p><strong>amdSec ID:</strong> {{ original_file['amdsec_id'] }}</p>
-<p><strong>SHA256 hash:</strong> {{ original_file['sha256'] }}</p>
+<p><strong>{{ original_file['hashtype'] }} hash:</strong> {{ original_file['hashvalue'] }}</p>
 
 <h3>Detailed identification</h3>
 <div class="well">
