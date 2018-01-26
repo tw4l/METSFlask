@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+<h3>AIP UUID: {{ aip_uuid }}</h3>
 <p><strong>METS File:</strong> {{ mets_file }}</p>
 {% if dcmetadata %}
-<h3>Dublin Core descriptive metadata</h3>
+<h3>Descriptive metadata</h3>
   {% for element in dcmetadata %}
     <p><strong>{{ element['element'].title() }}:</strong> {{ element['value'] }}</p>
   {% endfor %}
 {% endif %}
-<h3>Original files</h3>
+{% if original_files %}
+<h3>Original files (count: {{ filecount }})</h3>
 <p><em>Click on any column header to sort the table by that value.</em></p>
 <table class="table table-striped table-bordered table-condensed sortable">
 <tr>
@@ -20,7 +22,6 @@
   <td><strong>UUID</strong></td>
   <td><strong>Details</strong></td>
 </tr>
-{% if original_files %}
     {% for original_file in original_files %}
         <tr>
           

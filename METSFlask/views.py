@@ -63,8 +63,11 @@ def show_aip(mets_file):
     mets_instance = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
     original_files = mets_instance.metslist
     dcmetadata = mets_instance.dcmetadata
+    filecount = mets_instance.originalfilecount
+    aip_uuid = mets_file[5:41]
     return render_template('aip.html', original_files=original_files, 
-        mets_file=mets_file, dcmetadata=dcmetadata)
+        mets_file=mets_file, dcmetadata=dcmetadata, filecount=filecount, 
+        aip_uuid=aip_uuid)
 
 
 @app.route('/delete/<mets_file>')

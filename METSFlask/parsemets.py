@@ -76,6 +76,7 @@ class METSFile(object):
         """
         # create list
         original_files = []
+        original_file_count = 0
 
         # get METS file name
         mets_filename = os.path.basename(self.path)
@@ -110,6 +111,8 @@ class METSFile(object):
 
         # gather info for each file in filegroup "original"
         for target in mets_root.findall(".//fileGrp[@USE='original']/file"):
+
+            original_file_count += 1
 
             # create new dictionary for this item's info
             file_data = dict()
@@ -182,6 +185,6 @@ class METSFile(object):
         dc_metadata = self.parse_dc(root)
 
         # add file info to database
-        mets_instance = METS(mets_filename, self.nickname, original_files, dc_metadata)
+        mets_instance = METS(mets_filename, self.nickname, original_files, dc_metadata, original_file_count)
         db.session.add(mets_instance)
         db.session.commit()
