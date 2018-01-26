@@ -43,7 +43,7 @@ class METS(object):
         """
         # Parse DC
         dmds = root.xpath('dmdSec/mdWrap[@MDTYPE="DC"]/parent::*')
-        dc_model = dict()
+        dcmetadata = []
         
         # Find which DC to parse
         if len(dmds) > 0:
@@ -61,10 +61,11 @@ class METS(object):
                     dc_xml = dmd.find('mdWrap/xmlData/dublincore')
                     break
             for elem in dc_xml:
-                tag = elem.tag
-                dc_model['%s' % (tag)] = elem.text
-            print('Dublin Core:', dc_model)
-            return dc_model
+            	dc_element = dict()
+                dc_element['element'] = elem.tag
+                dc_element['value'] = elem.text
+                dcmetadata.append(dc_element)
+            return dcmetadata
 
     def parse_mets(self):
         """
