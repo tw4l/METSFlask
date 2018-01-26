@@ -61,7 +61,7 @@ class METS(object):
                     dc_xml = dmd.find('mdWrap/xmlData/dublincore')
                     break
             for elem in dc_xml:
-            	dc_element = dict()
+                dc_element = dict()
                 dc_element['element'] = elem.tag
                 dc_element['value'] = elem.text
                 dcmetadata.append(dc_element)
@@ -75,7 +75,7 @@ class METS(object):
         original_files = []
 
         # get METS file name
-    	mets_filename = os.path.basename(mets_path)
+        mets_filename = os.path.basename(mets_path)
 
         # open xml file and strip namespaces
         tree = etree.parse(self.path)
@@ -180,5 +180,5 @@ class METS(object):
 
         # add file info to database
         mets_instance = METS('%s' % (mets_filename), self.nickname, original_files, dc_metadata)
-    	db.session.add(mets_instance)
-    	db.session.commit()
+        db.session.add(mets_instance)
+        db.session.commit()
