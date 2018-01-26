@@ -165,6 +165,10 @@ class METSFile(object):
             # format filepath
             file_data['filepath'] = file_data['filepath'].replace('%transferDirectory%', '')
 
+            # format PUID
+            if not 'fido' in file_data['puid'].lower():
+                file_data['puid'] = "<a href=\"http://nationalarchives.gov.uk/PRONOM/%s\" target=\"_blank\">%s</a>" % (file_data['puid'], file_data['puid'])
+
             # create human-readable size
             file_data['bytes'] = int(file_data['bytes'])
             file_data['size'] = '0 bytes' # default to none
