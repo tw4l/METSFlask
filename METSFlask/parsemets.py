@@ -67,7 +67,8 @@ class METSFile(object):
                 dc_element = dict()
                 dc_element['element'] = elem.tag
                 dc_element['value'] = elem.text
-                dcmetadata.append(dc_element)
+                if not dc_element['value'] is None:
+                    dcmetadata.append(dc_element)
             return dcmetadata
 
     def parse_mets(self):
