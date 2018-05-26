@@ -18,7 +18,7 @@ All files uploaded to METSFlask are deleted after being read into the database. 
 `virtualenv venv`  
 * Activate virtualenv:  
 `source venv/bin/activate`  
-* Install requiremenents:  
+* Install requirements:  
 `pip install -r requirements.txt`   
 * Create database:  
 `chmod a+x db_create.py`    
