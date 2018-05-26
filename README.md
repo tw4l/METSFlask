@@ -45,3 +45,10 @@ If you get `ImportError: No module named django` on the last step, activate the 
 ## PUID links
 
 The table of original files for each AIP and detailed pages for each digital file contain links to PRONOM for particular PUIDs. These links will resolve for all identifications if Siegfried was used as the identification tool. If Fido was used, links to format entries in PRONOM (e.g. "fmt/#" or "x-fmt/#") should resolve; Fido entries (e.g. "fido-fmt/189.word") will not. 
+
+## Creators
+
+* Canadian Centre for Architecture
+* Tim Walsh
+
+This project was initially developed in 2016-2017 for the [Canadian Centre for Architecture](https://cca.qc.ca) by Tim Walsh, Digital Archivist, as part of the development of the Archaeology of the Digital project.
