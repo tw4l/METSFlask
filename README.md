@@ -51,4 +51,4 @@ The table of original files for each AIP and detailed pages for each digital fil
 * Canadian Centre for Architecture
 * Tim Walsh
 
-This project was initially developed in 2016-2017 for the [Canadian Centre for Architecture](https://cca.qc.ca) by Tim Walsh, Digital Archivist, as part of the development of the Archaeology of the Digital project.
+This project was initially developed in 2016-2017 for the [Canadian Centre for Architecture](https://www.cca.qc.ca) by Tim Walsh, Digital Archivist, as part of the development of the Archaeology of the Digital project.
