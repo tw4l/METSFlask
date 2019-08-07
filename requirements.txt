@@ -5,3 +5,4 @@ Flask>=0.12.0
 Flask-SQLAlchemy>=2.1
 sqlalchemy-migrate==0.11.0
 lxml>=3.7.3
+metsrw>=0.3.11
