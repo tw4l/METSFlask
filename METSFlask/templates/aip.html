@@ -6,18 +6,17 @@
   <li class="active">{{ mets_file }}</li>
 </ul>
 
-<h3>AIP UUID: {{ aip_uuid }}</h3>
-<p><strong>METS File:</strong> {{ mets_file }}</p>
-<p><strong>Total files:</strong> {{ filecount }}</p>
-<p><strong>Original files:</strong> {{ original_filecount }}</p>
-<p><strong>Preservation files:</strong> {{ preservation_filecount }}</p>
+<h3>METS File: {{ mets_file }}</h3>
+<p><strong>AIP UUID:</strong> {{ aip_uuid }}</p>
+<p><strong>Total files:</strong> {{ filecount }}  |  <strong>Original files:</strong> {{ original_filecount }}  |  <strong>Preservation files:</strong> {{ preservation_filecount }}</p>
 
-<!-- {% if dcmetadata %}
+<!-- Descriptive metadata -->
+{% if dcmetadata %}
 <h3>Descriptive metadata</h3>
   {% for element in dcmetadata %}
-    <p><strong>{{ element['element'].title() }}:</strong> {{ element['value'] }}</p>
+    <p><strong>{{ element.element.title() }}:</strong> {{ element.value }}</p>
   {% endfor %}
-{% endif %} -->
+{% endif %}
 
 <!-- Original files -->
 {% if original_files %}

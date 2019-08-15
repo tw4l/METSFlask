@@ -8,10 +8,9 @@
 </ul>
 
 <h3>File: {{ file_details.path }}</h3>
-<p><strong>File UUID:</strong> {{ file_details.file_uuid }}</p>
+<p><strong>UUID:</strong> {{ file_details.file_uuid }}</p>
 <p><strong>Use:</strong> {{ file_details.use }}</p>
-<p><strong>File ID:</strong> {{ file_details.file_id }}</p>
-<p><strong>ADMIDs:</strong>
+<p><strong>Associated ADMIDs:</strong>
 	{% for admid in admids %}
 		{{ admid.admid }}{% if not loop.last %},{% endif %}
 	{% endfor %}
@@ -22,22 +21,40 @@
 <div class="well">
 	<p><strong>Format:</strong> {{ premis_object.format_name }}</p>
 	<p><strong>Version:</strong> {{ premis_object.format_version }}</p>
-	<p><strong>Format registry key:</strong> {{ premis_object.format_registry_key }}</p>
-	<p><strong>Format registry name:</strong> {{ premis_object.format_registry_name }}</p>
+	<p><strong>{{ premis_object.format_registry_name }} ID:</strong> <a href="http://nationalarchives.gov.uk/PRONOM/{{ premis_object.format_registry_key }}">{{ premis_object.format_registry_key }}</a></p>
 	<p><strong>Size:</strong> {{ premis_object.size }} bytes</p>
-	<p><strong>Message digest (checksum):</strong> {{ premis_object.message_digest }}</p>
-	<p><strong>Message digest algorithm:</strong> {{ premis_object.message_digest_algorithm }}</p>
-	<p><strong>Raw output:</strong> {{ premis_object.raw_output }}</p>
+	<p><strong>Size (human-readable):</strong> {{ premis_object.size_hr }}</p>
+	<p><strong>Message digest ({{ premis_object.message_digest_algorithm }}):</strong> {{ premis_object.message_digest }}</p>
+	<p><strong>Original name:</strong> {{ premis_object.original_name }}</p>
+	<!-- Hide raw output by default -->
+	<button data-toggle="collapse" data-target="#{{ premis_object.id }}">Show PREMIS</button>
+	<div id="{{ premis_object.id }}" class="collapse">
+		<p><strong>Raw data:</strong> {{ premis_object.raw_output }}</p>
+	</div>
 </div>
 {% endfor %}
 
 <h3>PREMIS Events</h3>
 {% for premis_event in premis_events %}
-<p><strong>Event:</strong> 
-	<div class="well">
-		{{ premis_event.raw_output }}
+<div class="well">
+	<h4>UUID: {{ premis_event.event_uuid }}</h4>
+	<p><strong>Type:</strong> {{ premis_event.event_type }}</p>
+	<p><strong>Datetime:</strong> {{ premis_event.event_datetime }}</p>
+	{% if premis_event.event_detail %}
+		<p><strong>Detail:</strong> {{ premis_event.event_detail }}</p>
+	{% endif %}
+	{% if premis_event.event_outcome %}
+		<p><strong>Outcome:</strong> {{ premis_event.event_outcome }}</p>
+	{% endif %}
+	{% if premis_event.event_detail_note %}
+		<p><strong>Outcome detail note:</strong> {{ premis_event.event_detail_note }}</p>
+	{% endif %}
+	<!-- Hide raw output by default -->
+	<button data-toggle="collapse" data-target="#{{ premis_event.id }}">Show PREMIS</button>
+	<div id="{{ premis_event.id }}" class="collapse">
+		<p><strong>Raw data:</strong> {{ premis_event.raw_output }}</p>
 	</div>
-<p>
+</div>
 {% endfor %}
 
 {% endblock %}
