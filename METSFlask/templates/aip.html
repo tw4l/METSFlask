@@ -2,42 +2,49 @@
 {% block content %}
 <h1>AIP UUID: {{ aip_uuid }}</h1>
 <p><strong>METS File:</strong> {{ mets_file }}</p>
+
+<!-- Dublin Core descriptive metadata -->
 {% if dcmetadata %}
 <h2>Descriptive metadata</h2>
+<dl class="row">
   {% for element in dcmetadata %}
-    <p><strong>{{ element['element'].title() }}:</strong> {{ element['value'] }}</p>
+    <dt class="col-sm-3">{{ element['element'].title() }}:</dt>
+    <dd class="col-sm-9">{{ element['value'] }}</dd>
   {% endfor %}
+</dl>
 {% endif %}
+
+<!-- Original files table -->
 {% if original_files %}
 <h2>Original files (count: {{ filecount }})</h2>
 <tagline class="text-muted"><em>Click on any column header to sort the table by that value.</em></tagline>
-
 <table class="table table-striped table-bordered table-condensed sortable">
-<tr>
-  <td><strong>Filepath</strong></td>
-  <td><strong>Format</strong></td>
-  <td><strong>Version</strong></td>
-  <td><strong>PUID</strong></td>
-  <td><strong>Size (bytes)</strong></td>
-  <td><strong>Last modified</strong></td>
-  <td><strong>UUID</strong></td>
-  <td><strong>Details</strong></td>
-</tr>
+  <thead>
+    <tr>
+      <th>Filepath</th>
+      <th>Format</th>
+      <th>Version</th>
+      <th>PUID</th>
+      <th>Size (bytes)</th>
+      <th>Last modified</th>
+      <th>UUID</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
     {% for original_file in original_files %}
-        <tr>
-          
-          <td>{{ original_file['filepath'] }}</td>
-          <td>{{ original_file['format'] }}</td>
-          <td>{{ original_file['version'] }}</td>
-          <td>{{ original_file['puid']|safe }}</td>
-          <td>{{ original_file['bytes'] }}</td>
-          <td>{{ original_file['modified_ois'] }}</td>
-          <td>{{ original_file['uuid'] }}</td>
-          <td><a href="/aip/{{ mets_file }}/file/{{ original_file['uuid'] }}"><button class="btn btn-primary">View</button></a></td>
-        </tr>
+      <tr>
+        <td>{{ original_file['filepath'] }}</td>
+        <td>{{ original_file['format'] }}</td>
+        <td>{{ original_file['version'] }}</td>
+        <td>{{ original_file['puid']|safe }}</td>
+        <td>{{ original_file['bytes'] }}</td>
+        <td>{{ original_file['modified_ois'] }}</td>
+        <td>{{ original_file['uuid'] }}</td>
+        <td><a href="/aip/{{ mets_file }}/file/{{ original_file['uuid'] }}"><button class="btn btn-primary">View</button></a></td>
+      </tr>
     {% endfor %}
-    </table>
-{% else %}
-    </table>
+  </tbody>
+</table>
 {% endif %}
 {% endblock %}
