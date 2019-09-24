@@ -23,7 +23,7 @@ def allowed_file(filename):
 @app.route("/index", methods=['GET', 'POST'])
 def index():
     mets_instances = METS.query.all()
-    return render_template('index.html', mets_instances = mets_instances)
+    return render_template('index.html', mets_instances=mets_instances)
 
 
 @app.route("/upload", methods=['GET', 'POST'])
@@ -46,6 +46,7 @@ def upload_file():
             flash('No selected file')
             return render_template('upload.html')
         if file and allowed_file(file.filename):
+            # Upload and parse file
             filename = secure_filename(file.filename)
             if not os.path.exists(app.config['UPLOAD_FOLDER']):
                 os.makedirs(app.config['UPLOAD_FOLDER'])
@@ -55,7 +56,9 @@ def upload_file():
             mets = METSFile(mets_path, aip_name, nickname)
             mets.parse_mets()
             os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # delete file from uploads folder
-            return render_template('uploadsuccess.html')
+            # Render index page
+            mets_instances = METS.query.all()
+            return render_template('index.html', mets_instances=mets_instances)
 
 
 @app.route('/aip/<mets_file>')
