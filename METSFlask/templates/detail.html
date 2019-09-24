@@ -3,102 +3,100 @@
 <h1>File UUID: {{ original_file['uuid'] }}</h1>
 <tagline><strong>METS File:</strong> {{ mets_file }}</tagline>
 
-<div class="container">
-  <div class="card" style="margin-top: 10px; margin-bottom: 10px;">
-    <h2 class="card-header">General details</h2>
-    <div class="card-body">
-      <dl class="row">
-        <dt class="col-sm-3">Filepath:</dt>
-        <dd class="col-sm-9">{{ original_file['filepath'] }}</dd>
-        <dt class="col-sm-3">Last modified:</dt>
-        <dd class="col-sm-9">{{ original_file['modified_ois'] }}</dd>
-        <dt class="col-sm-3">Size (human-readable):</dt>
-        <dd class="col-sm-9">{{ original_file['size'] }}</dd>
-        <dt class="col-sm-3">Size (bytes):</dt>
-        <dd class="col-sm-9">{{ original_file['bytes'] }}</dd>
-        <dt class="col-sm-3">File format:</dt>
-        <dd class="col-sm-9">{{ original_file['format'] }}</dd>
-        <dt class="col-sm-3">Version:</dt>
-        <dd class="col-sm-9">{{ original_file['version'] }}</dd>
-        <dt class="col-sm-3">PRONOM ID (PUID):</dt>
-        <dd class="col-sm-9">{{ original_file['puid']|safe }}</dd>
-        <dt class="col-sm-3">amdSec ID:</dt>
-        <dd class="col-sm-9">{{ original_file['amdsec_id'] }}</dd>
-        <dt class="col-sm-3">{{ original_file['hashtype'] }} hash:</dt>
-        <dd class="col-sm-9">{{ original_file['hashvalue'] }}</dd>
-      </dl>
-    </div>
+<div class="card" style="margin-top: 10px; margin-bottom: 10px;">
+  <h2 class="card-header">General details</h2>
+  <div class="card-body">
+    <dl class="row">
+      <dt class="col-sm-3">Filepath:</dt>
+      <dd class="col-sm-9">{{ original_file['filepath'] }}</dd>
+      <dt class="col-sm-3">Last modified:</dt>
+      <dd class="col-sm-9">{{ original_file['modified_ois'] }}</dd>
+      <dt class="col-sm-3">Size (human-readable):</dt>
+      <dd class="col-sm-9">{{ original_file['size'] }}</dd>
+      <dt class="col-sm-3">Size (bytes):</dt>
+      <dd class="col-sm-9">{{ original_file['bytes'] }}</dd>
+      <dt class="col-sm-3">File format:</dt>
+      <dd class="col-sm-9">{{ original_file['format'] }}</dd>
+      <dt class="col-sm-3">Version:</dt>
+      <dd class="col-sm-9">{{ original_file['version'] }}</dd>
+      <dt class="col-sm-3">PRONOM ID (PUID):</dt>
+      <dd class="col-sm-9">{{ original_file['puid']|safe }}</dd>
+      <dt class="col-sm-3">amdSec ID:</dt>
+      <dd class="col-sm-9">{{ original_file['amdsec_id'] }}</dd>
+      <dt class="col-sm-3">{{ original_file['hashtype'] }} hash:</dt>
+      <dd class="col-sm-9">{{ original_file['hashvalue'] }}</dd>
+    </dl>
   </div>
+</div>
 
-  <div class="card" style="margin-top: 10px; margin-bottom: 10px;">
-    <h2 class="card-header">Detailed identification</h2>
-    <div class="card-body">
-    {% if original_file['fits_modified'] or original_file['fits_created'] or original_file['exiftool_format'] or original_file['exiftool_mimetype'] %}
-      <h3>ExifTool</h3>
-      {% endif %}
-      <dl class="row">
-      {% if original_file['fits_modified'] %}
-        <dt class="col-sm-3">Date modified:</dt>
-        <dd class="col-sm-9">{{ original_file['fits_modified'] }}</dd>
-      {% endif %}
-      {% if original_file['fits_created'] %}
-        <dt class="col-sm-3">Date created:</dt>
-        <dd class="col-sm-9">{{ original_file['fits_created'] }}</dd>
-      {% endif %}
-      {% if original_file['exiftool_format'] %}
-        <dt class="col-sm-3">Format:</dt>
-        <dd class="col-sm-9">{{ original_file['exiftool_format'] }}</dd>
-      {% endif %}
-      {% if original_file['exiftool_mimetype'] %}
-        <dt class="col-sm-3">MIME type:</dt>
-        <dd class="col-sm-9">{{ original_file['exiftool_mimetype'] }}</dd>
-      {% endif %}
-      {% if original_file['exiftool_rawoutput'] %}
-        <dt class="col-sm-3">Raw output:</dt>
-        <dd class="col-sm-9">{{ original_file['exiftool_rawoutput'] }}</dd>
-      {% endif %}
-      </dl>
-
-    {% if original_file['fileutil_format'] or original_file['fileutil_mimetype'] %}
-    <h3>File Utility</h3>
-      <dl class="row">
-        {% if original_file['fileutil_format'] %}
-        <dt class="col-sm-3">Format:</dt>
-        <dd class="col-sm-9">{{ original_file['fileutil_format'] }}</dd>
-        {% endif %}
-        {% if original_file['fileutil_mimetype'] %}
-        <dt class="col-sm-3">MIME type:</dt>
-        <dd class="col-sm-9">{{ original_file['fileutil_mimetype'] }}</dd>
-        {% endif %}
-      </dl>
+<div class="card" style="margin-top: 10px; margin-bottom: 10px;">
+  <h2 class="card-header">Detailed identification</h2>
+  <div class="card-body">
+  {% if original_file['fits_modified'] or original_file['fits_created'] or original_file['exiftool_format'] or original_file['exiftool_mimetype'] %}
+    <h3>ExifTool</h3>
     {% endif %}
-    </div>
-  </div>
+    <dl class="row">
+    {% if original_file['fits_modified'] %}
+      <dt class="col-sm-3">Date modified:</dt>
+      <dd class="col-sm-9">{{ original_file['fits_modified'] }}</dd>
+    {% endif %}
+    {% if original_file['fits_created'] %}
+      <dt class="col-sm-3">Date created:</dt>
+      <dd class="col-sm-9">{{ original_file['fits_created'] }}</dd>
+    {% endif %}
+    {% if original_file['exiftool_format'] %}
+      <dt class="col-sm-3">Format:</dt>
+      <dd class="col-sm-9">{{ original_file['exiftool_format'] }}</dd>
+    {% endif %}
+    {% if original_file['exiftool_mimetype'] %}
+      <dt class="col-sm-3">MIME type:</dt>
+      <dd class="col-sm-9">{{ original_file['exiftool_mimetype'] }}</dd>
+    {% endif %}
+    {% if original_file['exiftool_rawoutput'] %}
+      <dt class="col-sm-3">Raw output:</dt>
+      <dd class="col-sm-9">{{ original_file['exiftool_rawoutput'] }}</dd>
+    {% endif %}
+    </dl>
 
-  <div class="card" style="margin-top: 10px; margin-bottom: 10px;">
-    <h2 class="card-header">PREMIS Events</h2>
-    <div class="card-body">
-      {% for premis_event in original_file['premis_events'] %}
-      <h4>Event UUID: {{ premis_event['event_uuid'] }}</h4>
-      <dl class="row">
-        <dt class="col-sm-3">Event type:</dt>
-        <dd class="col-sm-9">{{ premis_event['event_type'] }}</dd>
-        <dt class="col-sm-3">Event datetime:</dt>
-        <dd class="col-sm-9">{{ premis_event['event_datetime'] }}</dd>
-        <dt class="col-sm-3">Event detail:</dt>
-        <dd class="col-sm-9">{{ premis_event['event_detail'] }}</dd>
-        <dt class="col-sm-3">Event outcome:</dt>
-        <dd class="col-sm-9">{{ premis_event['event_outcome'] }}</dd>
-        <dt class="col-sm-3">Event detail note:</dt>
-        <dd class="col-sm-9">{{ premis_event['event_detail_note'] }}</dd>
-        {% for premis_agent in premis_event['premis_agents'] %}
-          <p><strong>PREMIS Agent</strong></p>
-          <p>Agent type: {{ premis_agent['agent_type'] }}</p>
-          <p>Agent value: {{ premis_agent['agent_value'] }}</p>
-        {% endfor %}
-      </dl>
+  {% if original_file['fileutil_format'] or original_file['fileutil_mimetype'] %}
+  <h3>File Utility</h3>
+    <dl class="row">
+      {% if original_file['fileutil_format'] %}
+      <dt class="col-sm-3">Format:</dt>
+      <dd class="col-sm-9">{{ original_file['fileutil_format'] }}</dd>
+      {% endif %}
+      {% if original_file['fileutil_mimetype'] %}
+      <dt class="col-sm-3">MIME type:</dt>
+      <dd class="col-sm-9">{{ original_file['fileutil_mimetype'] }}</dd>
+      {% endif %}
+    </dl>
+  {% endif %}
+  </div>
+</div>
+
+<div class="card" style="margin-top: 10px; margin-bottom: 10px;">
+  <h2 class="card-header">PREMIS Events</h2>
+  <div class="card-body">
+    {% for premis_event in original_file['premis_events'] %}
+    <h4>Event UUID: {{ premis_event['event_uuid'] }}</h4>
+    <dl class="row">
+      <dt class="col-sm-3">Event type:</dt>
+      <dd class="col-sm-9">{{ premis_event['event_type'] }}</dd>
+      <dt class="col-sm-3">Event datetime:</dt>
+      <dd class="col-sm-9">{{ premis_event['event_datetime'] }}</dd>
+      <dt class="col-sm-3">Event detail:</dt>
+      <dd class="col-sm-9">{{ premis_event['event_detail'] }}</dd>
+      <dt class="col-sm-3">Event outcome:</dt>
+      <dd class="col-sm-9">{{ premis_event['event_outcome'] }}</dd>
+      <dt class="col-sm-3">Event detail note:</dt>
+      <dd class="col-sm-9">{{ premis_event['event_detail_note'] }}</dd>
+      {% for premis_agent in premis_event['premis_agents'] %}
+        <p><strong>PREMIS Agent</strong></p>
+        <p>Agent type: {{ premis_agent['agent_type'] }}</p>
+        <p>Agent value: {{ premis_agent['agent_value'] }}</p>
       {% endfor %}
-    </div>
+    </dl>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
