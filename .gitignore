@@ -1,2 +1,5 @@
 __pycache__/*
 METSFlask/__pycache__/*
+app.db
+db_repository/*
+venv/*
