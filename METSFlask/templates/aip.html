@@ -5,13 +5,15 @@
 
 <!-- Dublin Core descriptive metadata -->
 {% if dcmetadata %}
-<h2>Descriptive metadata</h2>
-<dl class="row">
-  {% for element in dcmetadata %}
-    <dt class="col-sm-3">{{ element['element'].title() }}:</dt>
-    <dd class="col-sm-9">{{ element['value'] }}</dd>
-  {% endfor %}
-</dl>
+<div class="container">
+  <h2>Descriptive metadata</h2>
+  <dl class="row">
+    {% for element in dcmetadata %}
+      <dt class="col-sm-3">{{ element['element'].title() }}:</dt>
+      <dd class="col-sm-9">{{ element['value'] }}</dd>
+    {% endfor %}
+  </dl>
+</div>
 {% endif %}
 
 <!-- Original files table -->
