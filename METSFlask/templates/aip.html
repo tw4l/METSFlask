@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>AIP UUID: {{ aip_uuid }}</h1>
+<h1 class="h2">AIP UUID: {{ aip_uuid }}</h1>
 <p><strong>METS File:</strong> {{ mets_file }}</p>
 
 <!-- Dublin Core descriptive metadata -->
 {% if dcmetadata %}
-<h2>Descriptive metadata</h2>
+<h2 class="h3">Descriptive metadata</h2>
 <dl class="row">
   {% for element in dcmetadata %}
     <dt class="col-sm-3">{{ element['element'].title() }}:</dt>
@@ -16,7 +16,7 @@
 
 <!-- Original files table -->
 {% if original_files %}
-<h2>Original files (count: {{ filecount }})</h2>
+<h2 class="h3">Original files (count: {{ filecount }})</h2>
 <tagline class="text-muted"><em>Click on any column header to sort the table by that value.</em></tagline>
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-condensed sortable">

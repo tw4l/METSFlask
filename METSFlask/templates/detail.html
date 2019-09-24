@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>File UUID: {{ original_file['uuid'] }}</h1>
+<h1 class="h2">File UUID: {{ original_file['uuid'] }}</h1>
 <tagline><strong>METS File:</strong> {{ mets_file }}</tagline>
 
 <div class="card" style="margin-top: 10px; margin-bottom: 10px;">
-  <h2 class="card-header">General details</h2>
+  <h2 class="card-header h3">General details</h2>
   <div class="card-body">
     <dl class="row">
       <dt class="col-sm-3">Filepath:</dt>
@@ -30,10 +30,10 @@
 </div>
 
 <div class="card" style="margin-top: 10px; margin-bottom: 10px;">
-  <h2 class="card-header">Detailed identification</h2>
+  <h2 class="card-header h3">Detailed identification</h2>
   <div class="card-body">
   {% if original_file['fits_modified'] or original_file['fits_created'] or original_file['exiftool_format'] or original_file['exiftool_mimetype'] %}
-    <h3>ExifTool</h3>
+    <h3 class="h4">ExifTool</h3>
     {% endif %}
     <dl class="row">
     {% if original_file['fits_modified'] %}
@@ -59,7 +59,7 @@
     </dl>
 
   {% if original_file['fileutil_format'] or original_file['fileutil_mimetype'] %}
-  <h3>File Utility</h3>
+  <h3 class="h4">File Utility</h3>
     <dl class="row">
       {% if original_file['fileutil_format'] %}
       <dt class="col-sm-3">Format:</dt>
@@ -75,10 +75,10 @@
 </div>
 
 <div class="card" style="margin-top: 10px; margin-bottom: 10px;">
-  <h2 class="card-header">PREMIS Events</h2>
+  <h2 class="card-header h3">PREMIS Events</h2>
   <div class="card-body">
     {% for premis_event in original_file['premis_events'] %}
-    <h4>Event UUID: {{ premis_event['event_uuid'] }}</h4>
+    <h3 class="h4">Event UUID: {{ premis_event['event_uuid'] }}</h4>
     <dl class="row">
       <dt class="col-sm-3">Event type:</dt>
       <dd class="col-sm-9">{{ premis_event['event_type'] }}</dd>
