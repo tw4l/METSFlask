@@ -80,10 +80,13 @@ def confirm_delete_aip(mets_file):
 
 @app.route('/deletesuccess/<mets_file>')
 def delete_aip(mets_file):
+    # Delete db instance
     mets_instance = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
     db.session.delete(mets_instance)
     db.session.commit()
-    return render_template('deletesuccess.html')
+    # Render index page
+    mets_instances = METS.query.all()
+    return render_template('index.html', mets_instances=mets_instances)
 
 
 @app.route('/aip/<mets_file>/file/<UUID>')
