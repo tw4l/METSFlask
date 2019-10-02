@@ -16,24 +16,28 @@
 
 <!-- Original files table -->
 {% if original_files %}
-<h2 class="h3">Original files (count: {{ filecount }})</h2>
-<tagline class="text-muted"><em>Click on any column header to sort the table by that value.</em></tagline>
-<div class="table-responsive">
-  <table class="table table-striped table-bordered table-condensed sortable">
-    <thead>
-      <tr>
-        <th>Filepath</th>
-        <th>Format</th>
-        <th>Version</th>
-        <th>PUID</th>
-        <th>Size (bytes)</th>
-        <th>Last modified</th>
-        <th>UUID</th>
-        <th>Details</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for original_file in original_files %}
+
+<!-- Formats chart -->
+<h3>Data visualization</h3>
+<div class="well">
+  <canvas id="chart" width="400" height="400"></canvas>
+</div>
+
+
+<h3>Original files (count: {{ filecount }})</h3>
+<p><em>Click on any column header to sort the table by that value.</em></p>
+<table class="table table-striped table-bordered table-condensed sortable">
+<tr>
+  <td><strong>Filepath</strong></td>
+  <td><strong>Format</strong></td>
+  <td><strong>Version</strong></td>
+  <td><strong>PUID</strong></td>
+  <td><strong>Size (bytes)</strong></td>
+  <td><strong>Last modified</strong></td>
+  <td><strong>UUID</strong></td>
+  <td><strong>Details</strong></td>
+</tr>
+    {% for original_file in original_files %}
         <tr>
           <td>{{ original_file['filepath'] }}</td>
           <td>{{ original_file['format'] }}</td>
@@ -48,5 +52,38 @@
     </tbody>
   </table>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+  let randCols = []
+  let jsonLabels = {{ labels|tojson }}
+  let jsonValues = {{ values|tojson }}
+
+  let makeColor = function() {
+    var r = Math.floor(Math.random() * 255)
+    var g = Math.floor(Math.random() * 255)
+    var b = Math.floor(Math.random() * 255)
+    return "rgb(" + r + "," + g + "," + b + ")"
+  }
+  for (let x=0;x<jsonValues.length;x++){randCols.push(makeColor())}
+
+  let canvas = document.getElementById("chart")
+  let ctx = canvas.getContext("2d")
+
+  let config = {
+      type: 'pie',
+      data: {
+        labels: jsonLabels,
+        datasets: [{
+          data: jsonValues,
+          label: "Formats chart",
+          backgroundColor: randCols,
+        }],
+      },
+      options: {responsive: false},
+    }
+   let myPie = new Chart(ctx, config)
+</script>
 {% endif %}
 {% endblock %}
+

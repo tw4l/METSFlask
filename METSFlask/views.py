@@ -61,15 +61,24 @@ def upload_file():
             return render_template('index.html', mets_instances=mets_instances)
 
 
+from collections import Counter
+
 @app.route('/aip/<mets_file>')
 def show_aip(mets_file):
     mets_instance = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
     original_files = mets_instance.metslist
     dcmetadata = mets_instance.dcmetadata
     filecount = mets_instance.originalfilecount
+    formatLabels = []
+    for original_file in original_files:
+        formatLabels.append(original_file['format'])
+    formatCounts = Counter(formatLabels)
+    labels = list(formatCounts.keys())
+    values = list(formatCounts.values())
     aip_uuid = mets_file[5:41]
-    return render_template('aip.html', original_files=original_files, 
-        mets_file=mets_file, dcmetadata=dcmetadata, filecount=filecount, 
+    return render_template('aip.html', 
+        labels=labels, values=values, original_files=original_files,
+        mets_file=mets_file, dcmetadata=dcmetadata, filecount=filecount,
         aip_uuid=aip_uuid)
 
 
