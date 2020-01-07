@@ -10,8 +10,8 @@
     <h2 class="h3">Descriptive metadata</h2>
     <dl class="row">
       {% for element in dcmetadata %}
-        <dt class="col-sm-3">{{ element['element'].title() }}:</dt>
-        <dd class="col-sm-9">{{ element['value'] }}</dd>
+        <dt class="col-sm-2">{{ element['element'].title() }}:</dt>
+        <dd class="col-sm-10">{{ element['value'] }}</dd>
       {% endfor %}
     </dl>
   </div>
