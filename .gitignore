@@ -3,3 +3,4 @@ METSFlask/__pycache__/*
 app.db
 db_repository/*
 venv/*
+uploads/*
