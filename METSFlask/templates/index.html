@@ -1,26 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
-  <br>
-  <h1>METSFlask</h1>
-  <tagline class="text-muted"><em>A web application for human-friendly exploration of Archivematica METS files.</em></tagline>
-  <br><br>
-  <h2 class="h3">METS Files to browse</h2>
-  <p class="text-muted"><em>Click on any column header to sort the table by that value.</em></p>
 
-  <table class="table table-striped table-bordered table-condensed sortable">
-    <tr>
-    <td><strong>METS File</strong></td>
-    <td><strong>Nickname</strong></td>
-    <td><strong>Actions</strong></td>
-    </tr>
-    {% if mets_instances %}
-      {% for mets_instance in mets_instances %}
-        <tr>
-          <td>{{ mets_instance.metsfile }}</td>
-          <td>{{ mets_instance.nickname }}</td>
-          <td><a href="/aip/{{ mets_instance.metsfile }}"><button class="btn btn-primary">View</button></a> <a href="/delete/{{ mets_instance.metsfile }}"><button class="btn btn-danger">Delete</button></a></td>
-        </tr>
-      {% endfor %}
-    {% endif %}
-  </table>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+  </ol>
+</nav>
+
+<h1>METSFlask</h1>
+<tagline class="text-muted"><em>A web application for human-friendly exploration of Archivematica METS files.</em></tagline>
+<br><br>
+<h2 class="h3">METS Files to browse</h2>
+<p class="text-muted"><em>Click on any column header to sort the table by that value.</em></p>
+
+<table class="table table-striped table-bordered table-condensed sortable">
+  <tr>
+  <td><strong>METS File</strong></td>
+  <td><strong>Nickname</strong></td>
+  <td><strong>Actions</strong></td>
+  </tr>
+  {% if mets_instances %}
+    {% for mets_instance in mets_instances %}
+      <tr>
+        <td>{{ mets_instance.metsfile }}</td>
+        <td>{{ mets_instance.nickname }}</td>
+        <td><a href="/aip/{{ mets_instance.metsfile }}"><button class="btn btn-primary">View</button></a> <a href="/delete/{{ mets_instance.metsfile }}"><button class="btn btn-danger">Delete</button></a></td>
+      </tr>
+    {% endfor %}
+  {% endif %}
+</table>
 {% endblock %}

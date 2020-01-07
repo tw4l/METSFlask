@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ mets_file }}</li>
+  </ol>
+</nav>
+
 <h1 class="h2">METS File: {{ mets_file }}</h1>
 <p><strong>AIP UUID:</strong> {{ aip_uuid }}</p>
 

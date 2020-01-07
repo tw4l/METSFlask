@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 class="h2">File UUID: {{ original_file['uuid'] }}</h1>
-<tagline><strong>METS File:</strong> {{ mets_file }}</tagline>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/aip/{{ mets_file }}">{{ mets_file }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ original_file['filename'] }}</li>
+  </ol>
+</nav>
+
+<h1 class="h2">File: {{ original_file['filename'] }}</h1>
 
 <div class="card" style="margin-top: 10px; margin-bottom: 10px;">
   <h2 class="card-header h3">File details</h2>
@@ -9,6 +17,8 @@
     <dl class="row">
       <dt class="col-sm-2">Filepath:</dt>
       <dd class="col-sm-10">{{ original_file['filepath'] }}</dd>
+      <dt class="col-sm-2">UUID:</dt>
+      <dd class="col-sm-10">{{ original_file['uuid'] }}</dd>
       <dt class="col-sm-2">Last modified:</dt>
       <dd class="col-sm-10">{{ original_file['modified_ois'] }}</dd>
       <dt class="col-sm-2">Size (human-readable):</dt>
