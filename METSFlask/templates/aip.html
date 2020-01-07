@@ -1,67 +1,96 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 class="h2">AIP UUID: {{ aip_uuid }}</h1>
-<p><strong>METS File:</strong> {{ mets_file }}</p>
+<h1 class="h2">METS File: {{ mets_file }}</h1>
+<p><strong>AIP UUID:</strong> {{ aip_uuid }}</p>
 
-<!-- Dublin Core descriptive metadata -->
-{% if dcmetadata %}
-<h2 class="h3">Descriptive metadata</h2>
-<dl class="row">
-  {% for element in dcmetadata %}
-    <dt class="col-sm-3">{{ element['element'].title() }}:</dt>
-    <dd class="col-sm-9">{{ element['value'] }}</dd>
-  {% endfor %}
-</dl>
-{% endif %}
+<div class="row">
+  <!-- Dublin Core descriptive metadata -->
+  {% if dcmetadata %}
+  <div class="col-lg">
+    <h2 class="h3">Descriptive metadata</h2>
+    <dl class="row">
+      {% for element in dcmetadata %}
+        <dt class="col-sm-3">{{ element['element'].title() }}:</dt>
+        <dd class="col-sm-9">{{ element['value'] }}</dd>
+      {% endfor %}
+    </dl>
+  </div>
+  {% endif %}
+
+  <!-- Visualization -->
+  <div class="col-lg" id="formatChart" style="display: none; margin-bottom: 10px;">
+    <h2 class="h3">File format visualization</h2>
+    <canvas id="chart" width="400" height="400" aria-label="Format pie chart" role="img">
+      <!-- Fallback text -->
+      <p>Canvas element not supported.</p>
+    </canvas>
+  </div>
+</div>
 
 <!-- Original files table -->
 {% if original_files %}
-
-<!-- Formats chart -->
-<h2 class="h3">Data visualization</h2>
-<div class="well" style="margin: 10px;">
-  <canvas id="chart" width="400" height="400" aria-label="Format pie chart" role="img">
-    <!-- Fallback text -->
-    <p>Canvas element not supported.</p>
-  </canvas>
+<div class="row">
+  <div class="col">
+    <h2 class="h3">
+      Original files (count: {{ filecount }})
+      <span>
+        <button type="button" class="btn btn-secondary" id="formatChartBtn">
+          Show visualization
+        </button>
+      </span>
+    </h2>
+    <tagline class="text-muted"><em>Click on any column header to sort the table by that value.</em></tagline>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-condensed sortable">
+        <thead>
+          <tr>
+            <th>Filepath</th>
+            <th>Format</th>
+            <th>Version</th>
+            <th>PUID</th>
+            <th>Size (bytes)</th>
+            <th>Last modified</th>
+            <th>UUID</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for original_file in original_files %}
+            <tr>
+              <td>{{ original_file['filepath'] }}</td>
+              <td>{{ original_file['format'] }}</td>
+              <td>{{ original_file['version'] }}</td>
+              <td>{{ original_file['puid']|safe }}</td>
+              <td>{{ original_file['bytes'] }}</td>
+              <td>{{ original_file['modified_ois'] }}</td>
+              <td>{{ original_file['uuid'] }}</td>
+              <td><a href="/aip/{{ mets_file }}/file/{{ original_file['uuid'] }}"><button class="btn btn-primary">View</button></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+{% else %}
+<p>No original files to display.</p>
 
-
-<h2 class="h3">Original files (count: {{ filecount }})</h2>
-<tagline class="text-muted"><em>Click on any column header to sort the table by that value.</em></tagline>
-<div class="table-responsive">
-  <table class="table table-striped table-bordered table-condensed sortable">
-    <thead>
-      <tr>
-        <th>Filepath</th>
-        <th>Format</th>
-        <th>Version</th>
-        <th>PUID</th>
-        <th>Size (bytes)</th>
-        <th>Last modified</th>
-        <th>UUID</th>
-        <th>Details</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for original_file in original_files %}
-        <tr>
-          <td>{{ original_file['filepath'] }}</td>
-          <td>{{ original_file['format'] }}</td>
-          <td>{{ original_file['version'] }}</td>
-          <td>{{ original_file['puid']|safe }}</td>
-          <td>{{ original_file['bytes'] }}</td>
-          <td>{{ original_file['modified_ois'] }}</td>
-          <td>{{ original_file['uuid'] }}</td>
-          <td><a href="/aip/{{ mets_file }}/file/{{ original_file['uuid'] }}"><button class="btn btn-primary">View</button></a></td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+{% endif %}
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
+  // toggle format chart
+  $("#formatChartBtn").click(function(){
+    $("#formatChart").toggle()
+    let buttonText = $("#formatChartBtn").text().trim()
+    if (buttonText === 'Show visualization') {
+      $("#formatChartBtn").text('Hide visualization')
+    } else {
+      $("#formatChartBtn").text('Show visualization')
+    }
+  })
+
+  // draw format chart
   let randCols = []
   let jsonLabels = {{ labels|tojson }}
   let jsonValues = {{ values|tojson }}
@@ -91,6 +120,6 @@
     }
    let myPie = new Chart(ctx, config)
 </script>
-{% endif %}
+
 {% endblock %}
 
