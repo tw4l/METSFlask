@@ -1,17 +1,18 @@
-from flask import Flask, request, redirect, render_template, flash
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.utils import secure_filename
-from METSFlask import app, db
-from .models import METS
-from .parsemets import METSFile, convert_size
-
-import collections
 import datetime
 import fnmatch
 import math
 import os
 import sys
+
+from collections import Counter
+from flask import Flask, request, redirect, render_template, flash
+from flask_sqlalchemy import SQLAlchemy
 from lxml import etree, objectify
+from werkzeug.utils import secure_filename
+
+from METSFlask import app, db
+from .models import METS
+from .parsemets import METSFile, convert_size
 
 
 def allowed_file(filename):
@@ -60,8 +61,6 @@ def upload_file():
             mets_instances = METS.query.all()
             return render_template('index.html', mets_instances=mets_instances)
 
-
-from collections import Counter
 
 @app.route('/aip/<mets_file>')
 def show_aip(mets_file):
