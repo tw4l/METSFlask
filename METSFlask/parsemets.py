@@ -165,6 +165,7 @@ class METSFile(object):
 
             # format filepath
             file_data['filepath'] = file_data['filepath'].replace('%transferDirectory%', '')
+            file_data['filename'] = os.path.basename(file_data['filepath'])
 
             # format PUID
             if not 'fido' in file_data['puid'].lower():
