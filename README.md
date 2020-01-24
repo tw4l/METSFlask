@@ -13,7 +13,7 @@ All files uploaded to METSFlask are deleted after being read into the database. 
 (Tested with Python 2.7 and 3.5. It's recommended that you use Python 3, as there could be some Unicode handling issues with Python 2.)  
 
 * Clone files and cd to directory:  
-`git clone https://github.com/timothyryanwalsh/METSFlask && cd METSFlask`  
+`git clone https://github.com/tw4l/METSFlask && cd METSFlask`  
 * Set up virtualenv:  
 `virtualenv venv`  
 * Activate virtualenv:  
