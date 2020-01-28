@@ -51,7 +51,7 @@ class METSFile(object):
         # Find which DC to parse
         if len(dmds) > 0:
             # Want most recently updated
-            dmds = sorted(dmds, key=lambda e: e.get('CREATED'))
+            dmds = sorted(dmds, key=lambda e: e.get('CREATED', ""))
             # Only want SIP DC, not file DC
             div = root.find('structMap/div/div[@TYPE="Directory"][@LABEL="objects"]')
             dmdids = div.get('DMDID')
@@ -60,7 +60,7 @@ class METSFile(object):
                 return
             dmdids = dmdids.split()
             for dmd in dmds[::-1]:  # Reversed
-                if dmd.get('ID') in dmdids:
+                if dmd.get('ID', "") in dmdids:
                     dc_xml = dmd.find('mdWrap/xmlData/dublincore')
                     break
             for elem in dc_xml:
