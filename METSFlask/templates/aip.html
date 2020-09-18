@@ -53,24 +53,29 @@
           <tr>
             <th>Filepath</th>
             <th>Format</th>
-            <th>Version</th>
             <th>PUID</th>
             <th>Size (bytes)</th>
             <th>Last modified</th>
-            <th>UUID</th>
             <th>Details</th>
           </tr>
         </thead>
         <tbody>
         {% for original_file in original_files %}
             <tr>
-              <td>{{ original_file['filepath'] }}</td>
-              <td>{{ original_file['format'] }}</td>
-              <td>{{ original_file['version'] }}</td>
+              <td>
+                {{ original_file['filepath'] }}
+                <br>
+                <span class="text-muted"><small>UUID: {{ original_file['uuid'] }}</small></span>
+              </td>
+              <td>
+                {{ original_file['format'] }}
+                {% if original_file['version'] %}
+                  <span> ({{ original_file['version'] }})</span>
+                {% endif %}
+              </td>
               <td>{{ original_file['puid']|safe }}</td>
               <td>{{ original_file['bytes'] }}</td>
               <td>{{ original_file['modified_date'] }}</td>
-              <td>{{ original_file['uuid'] }}</td>
               <td><a href="/aip/{{ mets_file }}/file/{{ original_file['uuid'] }}"><button class="btn btn-primary">View</button></a></td>
             </tr>
           {% endfor %}
