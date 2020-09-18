@@ -26,7 +26,7 @@
   {% endif %}
 
   <!-- Visualization -->
-  <div class="col-lg" id="formatChart" style="display: none; margin-bottom: 10px;">
+  <div class="col-lg" id="formatChart" style="margin-bottom: 10px;">
     <h2 class="h3">File format visualization</h2>
     <canvas id="chart" width="400" height="400" aria-label="Format pie chart" role="img">
       <!-- Fallback text -->
@@ -42,14 +42,14 @@
     <h2 class="h3">
       Original files (count: {{ filecount }})
       <span>
-        <button type="button" class="btn btn-secondary" id="formatChartBtn">
-          Show visualization
+        <button type="button" class="btn btn-secondary" style="padding: 5px;" id="formatChartBtn">
+          Hide visualization
         </button>
       </span>
     </h2>
     <tagline class="text-muted"><em>Click on any column header to sort the table by that value.</em></tagline>
     <div class="table-responsive">
-      <table class="table table-striped table-bordered table-condensed sortable">
+      <table class="table table-striped table-bordered table-condensed datatable">
         <thead>
           <tr>
             <th>Filepath</th>
@@ -87,6 +87,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
+  // make table into datatable
+
   // toggle format chart
   $("#formatChartBtn").click(function(){
     $("#formatChart").toggle()
