@@ -96,15 +96,15 @@ class METSFile(object):
         # create dict for names and xpaths of desired info from individual files
         xml_file_elements = {
             'filepath': './techMD/mdWrap/xmlData/object/originalName',
-            'uuid': './techMD/mdWrap/xmlData/object/objectIdentifier/objectIdentifierValue', 
-            'hashtype': './techMD/mdWrap/xmlData/object/objectCharacteristics/fixity/messageDigestAlgorithm', 
-            'hashvalue': './techMD/mdWrap/xmlData/object/objectCharacteristics/fixity/messageDigest', 
-            'bytes': './techMD/mdWrap/xmlData/object/objectCharacteristics/size', 
-            'format': './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatDesignation/formatName', 
-            'version': './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatDesignation/formatVersion', 
-            'puid': './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatRegistry/formatRegistryKey', 
-            'fits_modified_unixtime': './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/fileinfo/fslastmodified[@toolname="OIS File Information"]', 
-            'fits_modified': './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/toolOutput/tool[@name="Exiftool"]/exiftool/FileModifyDate'
+            'uuid': './techMD/mdWrap/xmlData/object/objectIdentifier/objectIdentifierValue',
+            'hashtype': './techMD/mdWrap/xmlData/object/objectCharacteristics/fixity/messageDigestAlgorithm',
+            'hashvalue': './techMD/mdWrap/xmlData/object/objectCharacteristics/fixity/messageDigest',
+            'bytes': './techMD/mdWrap/xmlData/object/objectCharacteristics/size',
+            'format': './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatDesignation/formatName',
+            'version': './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatDesignation/formatVersion',
+            'puid': './techMD/mdWrap/xmlData/object/objectCharacteristics/format/formatRegistry/formatRegistryKey',
+            'modified_date': './techMD/mdWrap/xmlData/object/objectCharacteristics/creatingApplication/dateCreatedByApplication',
+            'fits_modified_unixtime': './techMD/mdWrap/xmlData/object/objectCharacteristics/objectCharacteristicsExtension/fits/fileinfo/fslastmodified[@toolname="OIS File Information"]',
             }
 
         # build xml document root
@@ -177,12 +177,10 @@ class METSFile(object):
             if file_data['bytes'] != 0:
                 file_data['size'] = convert_size(file_data['bytes'])
 
-            # create human-readable version of last modified Unix time stamp (if file was characterized by FITS)
+            # create human-readable version of last modified Unix time stamp if file was characterized by FITS
             if file_data['fits_modified_unixtime']:
                 unixtime = int(file_data['fits_modified_unixtime'])/1000 # convert milliseconds to seconds
-                file_data['modified_ois'] = datetime.datetime.fromtimestamp(unixtime).isoformat() # convert from unix to iso8601
-            else:
-                file_data['modified_ois'] = ''
+                file_data['modified_unix_timestamp'] = datetime.datetime.fromtimestamp(unixtime).isoformat() # convert from unix to iso8601
 
             # append file_data to original files
             original_files.append(file_data)
