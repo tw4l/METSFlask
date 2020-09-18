@@ -25,10 +25,8 @@
       {% else %}
         <dd class="col-sm-10">{{ original_file['modified_date'] }}</dd>
       {% endif %}
-      <dt class="col-sm-2">Size (human-readable):</dt>
-      <dd class="col-sm-10">{{ original_file['size'] }}</dd>
-      <dt class="col-sm-2">Size (bytes):</dt>
-      <dd class="col-sm-10">{{ original_file['bytes'] }}</dd>
+      <dt class="col-sm-2">Size:</dt>
+      <dd class="col-sm-10">{{ original_file['size'] }} ({{ original_file['bytes'] }} bytes)</dd>
       <dt class="col-sm-2">File format:</dt>
       <dd class="col-sm-10">{{ original_file['format'] }}</dd>
       <dt class="col-sm-2">Version:</dt>
