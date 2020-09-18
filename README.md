@@ -27,28 +27,9 @@ All files uploaded to METSFlask are deleted after being read into the database. 
 `./run.py`  
 * Go to `localhost:5000` in browser.  
 
-## Detailed identification and dates
-
-METSFlask works best when the amdSec for every file in an AIP contains characterization information from FITS. The ExifTool raw output in the "Detailed identification" section of detailed page views and the last modified date used in both the AIP table view and detailed page views rely on FITS information being present in the amdSec. These elements will appear blank in METSFlask for file types that are not set to be characterized by FITS in your local Archivematica FPR.  
-
-Since Archivematica 1.4, FITS is not set as a default Characterization tool for all file types. To enable FITS as a characterization tool for all files (in addition to other more specific tools run on specific file types) in Archivematica 1.6, Artefactual has created an "ensure-fits-characterization" script as part of the [archivematica-devtools repo](https://github.com/artefactual/archivematica-devtools/tree/dev/issue-11019-ensure-fits-characterization).
-
-To enable FITS characterization for all files in Archivematica 1.6, first clone the Archivematica-devtools repo and then:  
-* `cd /path/to/archivematica-devtools`  
-* `git checkout dev/issue-11019-ensure-fits-characterization`  
-* `sudo make install`  
-* `sudo am ensure-fits-characterization`
-
-If you get `ImportError: No module named django` on the last step, activate the relevant venv - in Vagrant-provisioned AM 1.6.1, this can be done with the following command:  
-`source /usr/share/python/archivematica-dashboard/bin/activate` 
-
-## PUID links
-
-The table of original files for each AIP and detailed pages for each digital file contain links to PRONOM for particular PUIDs. These links will resolve for all identifications if Siegfried was used as the identification tool. If Fido was used, links to format entries in PRONOM (e.g. "fmt/#" or "x-fmt/#") should resolve; Fido entries (e.g. "fido-fmt/189.word") will not. 
-
 ## Creators
 
 * Canadian Centre for Architecture
-* Tim Walsh
+* Tessa Walsh
 
-This project was initially developed in 2016-2017 for the [Canadian Centre for Architecture](https://www.cca.qc.ca) by Tim Walsh, Digital Archivist, as part of the development of the Archaeology of the Digital project.
+This project was initially developed in 2016-2017 for the [Canadian Centre for Architecture](https://www.cca.qc.ca) by Tessa Walsh, Digital Archivist, as part of the development of the Archaeology of the Digital project.
