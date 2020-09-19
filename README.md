@@ -2,15 +2,30 @@
 
 A web application for human-friendly exploration of Archivematica METS files.
 
-![demo](metsflask-demo.gif)
-
 ## Live site (try it out!):  
 [http://bitarchivist.pythonanywhere.com/](http://bitarchivist.pythonanywhere.com/)  
 
-All files uploaded to METSFlask are deleted after being read into the database. Database entries are deletable by all users at any time. That is to say - feel free to upload and view your own files! You can delete them from the web app as soon as you're done.  
+All files uploaded to METSFlask are deleted after being read into the database. Database entries are deletable by all users at any time. That is to say - feel free to upload and view your own files! You can delete them from the web app as soon as you're done.
+
+## Screenshots
+
+Home page:
+
+![index](screenshots/index.png)
+
+AIP METS file view:
+
+![aip](screenshots/aip.png)
+
+![aip_1](screenshots/aip_1.png)
+
+File detail view:
+
+![detail](screenshots/detail.png)
 
 ## Install locally (dev):  
-(Tested with Python 2.7 and 3.5. It's recommended that you use Python 3, as there could be some Unicode handling issues with Python 2.)  
+
+Requires Python 3.4+ or higher.
 
 * Clone files and cd to directory:  
 `git clone https://github.com/tw4l/METSFlask && cd METSFlask`  
