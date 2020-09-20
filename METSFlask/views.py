@@ -68,8 +68,7 @@ def upload_file():
                 # Delete file from uploads folder
                 os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) 
                 # Render index page
-                mets_instances = METS.query.all()
-                return render_template('index.html', mets_instances=mets_instances)
+                return redirect('/aip/{}'.format(filename))
             except Exception:
                 pass
         error = 'Unable to process uploaded file'
