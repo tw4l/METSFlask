@@ -79,21 +79,24 @@ def upload_file():
 
 @app.route('/aip/<mets_file>')
 def show_aip(mets_file):
-    mets_instance = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
-    original_files = mets_instance.metslist
-    dcmetadata = mets_instance.dcmetadata
-    filecount = mets_instance.originalfilecount
-    formatLabels = []
-    for original_file in original_files:
-        formatLabels.append(original_file['format'])
-    formatCounts = Counter(formatLabels)
-    labels = list(formatCounts.keys())
-    values = list(formatCounts.values())
-    aip_uuid = mets_file[5:41]
-    return render_template('aip.html', 
-        labels=labels, values=values, original_files=original_files,
-        mets_file=mets_file, dcmetadata=dcmetadata, filecount=filecount,
-        aip_uuid=aip_uuid)
+    try:
+        mets_instance = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
+        original_files = mets_instance.metslist
+        dcmetadata = mets_instance.dcmetadata
+        filecount = mets_instance.originalfilecount
+        formatLabels = []
+        for original_file in original_files:
+            formatLabels.append(original_file['format'])
+        formatCounts = Counter(formatLabels)
+        labels = list(formatCounts.keys())
+        values = list(formatCounts.values())
+        aip_uuid = mets_file[5:41]
+        return render_template('aip.html', 
+            labels=labels, values=values, original_files=original_files,
+            mets_file=mets_file, dcmetadata=dcmetadata, filecount=filecount,
+            aip_uuid=aip_uuid)
+    except Exception:
+        return render_template('404.html'), 404
 
 
 @app.route('/delete/<mets_file>')
@@ -103,13 +106,17 @@ def confirm_delete_aip(mets_file):
 
 @app.route('/deletesuccess/<mets_file>')
 def delete_aip(mets_file):
-    # Delete db instance
-    mets_instance = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
-    db.session.delete(mets_instance)
-    db.session.commit()
-    # Render index page
-    mets_instances = METS.query.all()
-    return render_template('index.html', mets_instances=mets_instances)
+    try:
+        # Delete db instance
+        mets_instance = METS.query.filter_by(metsfile='%s' % (mets_file)).first()
+        db.session.delete(mets_instance)
+        db.session.commit()
+        # Render index page
+        return redirect("/")
+    except Exception:
+        pass
+    return redirect("/")
+    
 
 
 @app.route('/aip/<mets_file>/file/<UUID>')
