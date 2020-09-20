@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
+
+<!-- Errors -->
+{% if error %}
+  <div class="error alert alert-danger" role="alert">
+    <strong>Error:</strong> {{ error }}
+  </div>
+{% endif %}
+
+<!-- Upload form -->
 <div class="card">
   <h1 class="card-header h3">Upload METS File</h1>
   <div class="card-body">

@@ -34,32 +34,41 @@ def render_page():
 
 @app.route('/uploadsuccess', methods=['GET', 'POST'])
 def upload_file():
+    error = None
     if request.method == 'POST':
         nickname = request.form.get("nickname")
         # check if the post request has the file part
         if 'file' not in request.files:
-            flash('No file part')
-            return render_template('upload.html')
+            error = 'No file'
+            return render_template('upload.html', error=error)
         file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
         if file.filename == '':
-            flash('No selected file')
-            return render_template('upload.html')
+            error = 'No file'
+            return render_template('upload.html', error=error)
         if file and allowed_file(file.filename):
             # Upload and parse file
-            filename = secure_filename(file.filename)
-            if not os.path.exists(app.config['UPLOAD_FOLDER']):
-                os.makedirs(app.config['UPLOAD_FOLDER'])
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            mets_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            aip_name = os.path.basename(filename)
-            mets = METSFile(mets_path, aip_name, nickname)
-            mets.parse_mets()
-            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # delete file from uploads folder
-            # Render index page
-            mets_instances = METS.query.all()
-            return render_template('index.html', mets_instances=mets_instances)
+            try:
+                filename = secure_filename(file.filename)
+                upload_dir = app.config['UPLOAD_FOLDER']
+                if not os.path.exists(upload_dir):
+                    os.makedirs(upload_dir)
+                # Save file
+                mets_path = os.path.join(upload_dir, filename)
+                aip_name = os.path.basename(filename)
+                file.save(mets_path)
+                # Parse METS file to database
+                mets = METSFile(mets_path, aip_name, nickname)
+                mets.parse_mets()
+                # Delete file from uploads folder
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) 
+                # Render index page
+                mets_instances = METS.query.all()
+                return render_template('index.html', mets_instances=mets_instances)
+            except Exception:
+                pass
+        error = 'Unable to process uploaded file'
+        return render_template('upload.html', error=error)
+    return render_template('upload.html', error=error)
 
 
 @app.route('/aip/<mets_file>')
